@@ -14,9 +14,11 @@ public class PlayerMovement : MonoBehaviour {
     public float maxSpeed = 15.0f;
     private Vector3 velocity;
 
-    private Transform targetedEnemy;
-    private bool walking;
-    private bool enemyClicked;
+    // Enemy targeting
+    private EnemyBase targetedEnemy = null;
+    private GameObject eIndicator = null;
+
+    // Movement
     private Vector3 destination;
     public GameObject moveIndicator;
 
@@ -27,24 +29,69 @@ public class PlayerMovement : MonoBehaviour {
 
     private string Move = "Fire2";
 
-    void IssueMove() {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        int layer_mask = LayerMask.GetMask("Ground");
-        if (Physics.Raycast(ray, out hit, 100, layer_mask)) {
-            if (hit.collider.CompareTag("Enemy")) {
-                targetedEnemy = hit.transform;
-                enemyClicked = true;
-            } else {
-                walking = true;
-                enemyClicked = false;
+    void HitEnemy() {
+        if (targetedEnemy != null) {
+            // DO damage
+        }
+    }
+
+    GameObject CreateMoveIndicator(Vector3 position, bool isPersistent = false) {
+        GameObject indicator = GameObject.Instantiate(moveIndicator);
+        indicator.transform.position = position;
+        indicator.GetComponent<ShrinkToDeath>().enabled = !isPersistent;
+
+        return indicator;
+    }
+
+    /* Returns true if an enemy got targeted */
+    bool IssueMove() {
+        bool didSelectSomething = AttemptSelect();
+
+        if (didSelectSomething) {
+            destination = eIndicator.transform.position;
+        }
+        else {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            int layer_mask = LayerMask.GetMask("Ground");
+            if (Physics.Raycast(ray, out hit, 100, layer_mask)) {
                 destination = hit.point;
             }
         }
+
+        return didSelectSomething;
+    }
+
+    /* Returns true if an enemy got selected */
+    bool AttemptSelect() {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        int layer_mask = LayerMask.GetMask("Interactable");
+        if (Physics.Raycast(ray, out hit, 100, layer_mask)) {
+            targetedEnemy = hit.collider.GetComponent<EnemyBase>();
+            if (targetedEnemy != null) {
+                Vector3 enemyPosition = targetedEnemy.transform.position;
+                enemyPosition.y = 0.45f;
+
+                if (eIndicator != null) {
+                    GameObject.Destroy(eIndicator);
+                }
+
+                // Create an indicator under the enemy
+                eIndicator = CreateMoveIndicator(enemyPosition, true);
+                return true;
+            }
+        }
+
+        return false;
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        if (Input.GetButtonDown("Fire1")) {
+            AttemptSelect();
+        }
+
         if (Input.GetButtonDown(Move)) {
             clickTime = Time.time;
             IssueMove();
@@ -55,15 +102,14 @@ public class PlayerMovement : MonoBehaviour {
                 IssueMove();
 
                 // Create an indicator of where you're moving
-                GameObject indicator = GameObject.Instantiate(moveIndicator);
-                indicator.transform.position = destination + Vector3.up * 0.1f;
+                CreateMoveIndicator(destination + Vector3.up * 0.1f);
             }
         }
         if (Input.GetButton(Move)) {
-            //if (Time.time - clickTime > delay) {
+            if (Time.time - clickTime > delay) {
                 // Drag
                 IssueMove();
-            //}
+            }
         }
 
         Vector3 direction = destination - transform.position;
@@ -86,6 +132,8 @@ public class PlayerMovement : MonoBehaviour {
             velocity *= maxSpeed;
         }
 
+        if (velocity.magnitude > 0)
+            transform.rotation = Quaternion.LookRotation(velocity, Vector3.up);
         GetComponent<CharacterController>().SimpleMove(velocity);
     }
 }

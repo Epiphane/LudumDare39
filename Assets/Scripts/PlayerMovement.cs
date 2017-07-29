@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour {
     public float radius = 0.5f;
     public float attackSpeed = 1.0f;
     private float lastAttack = 0;
+    private bool isAttacking = false;
 
     // Enemy targeting
     private EnemyBase targetedEnemy = null;
@@ -49,8 +50,9 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    void AttackComplete() {
-        lastAttack = Time.time;
+    void BasicAttackComplete() {
+        targetedEnemy.TakeDamage(30);
+        isAttacking = false;
     }
 
     GameObject CreateMoveIndicator(Vector3 position, bool isPersistent = false, float scale = 1.0f) {
@@ -115,16 +117,25 @@ public class PlayerMovement : MonoBehaviour {
 
     // Attempt to attack
     void AttemptAttack() {
+        if (isAttacking) {
+            return;
+        }
+
         float timeBetweenAttacks = 1.0f / attackSpeed;
 
         if (Time.time > lastAttack + timeBetweenAttacks) {
             GetComponent<Animator>().SetTrigger("fireballThrow");
 
             lastAttack = Time.time;
+            isAttacking = true;
         }
     }
 
     void MoveToDestination() {
+        if (isAttacking) {
+            return;
+        }
+
         Vector3 direction = destination - transform.position;
         direction.y = 0;
 

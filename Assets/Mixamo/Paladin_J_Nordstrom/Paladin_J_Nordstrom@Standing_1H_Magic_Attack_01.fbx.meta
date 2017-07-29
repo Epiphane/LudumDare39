@@ -187,8 +187,8 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
-        functionName: Fart
+      - time: 0.3323782
+        functionName: BasicAttackComplete
         data: 
         objectReferenceParameter: {fileID: 100068, guid: b041cdd19f5eb284da803930d9ddc8b5,
           type: 3}

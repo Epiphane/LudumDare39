@@ -14,15 +14,14 @@ public class PlayerMovement : MonoBehaviour {
     public float maxSpeed = 15.0f;
     private Vector3 velocity;
 
-    //private NavMeshAgent navMeshAgent;
     private Transform targetedEnemy;
     private bool walking;
     private bool enemyClicked;
     private Vector3 destination;
+    public GameObject moveIndicator;
 
     // Use this for initialization
     void Start () {
-        //navMeshAgent = GetComponent<NavMeshAgent>();
         velocity = Vector3.zero;
     }
 
@@ -54,6 +53,10 @@ public class PlayerMovement : MonoBehaviour {
             if (Time.time - clickTime <= delay) {
                 // Click
                 IssueMove();
+
+                // Create an indicator of where you're moving
+                GameObject indicator = GameObject.Instantiate(moveIndicator);
+                indicator.transform.position = destination + Vector3.up * 0.1f;
             }
         }
         if (Input.GetButton(Move)) {

@@ -14,9 +14,14 @@ public class PlayerMovement : MonoBehaviour {
     public float maxSpeed = 15.0f;
     private Vector3 velocity;
 
+    public float attackRange = 1.0f;
+    public float attackSpeed = 1.0f;
+    private float lastAttack = 0;
+
     // Enemy targeting
     private EnemyBase targetedEnemy = null;
     private GameObject eIndicator = null;
+    private bool isMovingToEnemy;
 
     // Movement
     private Vector3 destination;
@@ -27,12 +32,17 @@ public class PlayerMovement : MonoBehaviour {
         velocity = Vector3.zero;
     }
 
+    private string Select = "Fire1";
     private string Move = "Fire2";
 
     void HitEnemy() {
         if (targetedEnemy != null) {
             // DO damage
         }
+    }
+
+    void AttackComplete() {
+        lastAttack = Time.time;
     }
 
     GameObject CreateMoveIndicator(Vector3 position, bool isPersistent = false) {
@@ -49,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (didSelectSomething) {
             destination = eIndicator.transform.position;
+            isMovingToEnemy = true;
         }
         else {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -57,6 +68,7 @@ public class PlayerMovement : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 100, layer_mask)) {
                 destination = hit.point;
             }
+            isMovingToEnemy = false;
         }
 
         return didSelectSomething;
@@ -85,10 +97,56 @@ public class PlayerMovement : MonoBehaviour {
 
         return false;
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        if (Input.GetButtonDown("Fire1")) {
+
+    // Attempt to attack
+    void AttemptAttack() {
+        float timeBetweenAttacks = 1.0f / attackSpeed;
+
+        if (Time.time > lastAttack + timeBetweenAttacks) {
+            GetComponent<Animator>().SetTrigger("fireballThrow");
+
+            lastAttack = Time.time;
+        }
+    }
+
+    void MoveToDestination() {
+        Vector3 direction = destination - transform.position;
+        direction.y = 0;
+
+        // For moving towards enemies, maintain a distance between
+        float magnitude = direction.magnitude;
+        if (magnitude - (isMovingToEnemy ? attackRange : 0) < 0.5f) {
+            GetComponent<Animator>().SetFloat("moveSpeed", 0);
+            //transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            return;
+        }
+
+        if (direction.magnitude > maxSpeed) {
+            direction.Normalize();
+            direction *= maxSpeed;
+        }
+
+        float moveSpeed = direction.magnitude;
+        transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        GetComponent<Animator>().SetFloat("moveSpeed", moveSpeed);
+        GetComponent<CharacterController>().SimpleMove(direction);
+
+        // Normalize to the attack radius
+        if (isMovingToEnemy) {
+            direction = transform.position - destination;
+            direction.y = 0;
+            magnitude = direction.magnitude;
+            if (magnitude <= attackRange) {
+                direction.Normalize();
+
+                GetComponent<CharacterController>().SimpleMove(destination + direction * attackRange);
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () {
+        if (Input.GetButtonDown(Select)) {
             AttemptSelect();
         }
 
@@ -112,28 +170,16 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
+        MoveToDestination();
+
         Vector3 direction = destination - transform.position;
-        direction.y = 0;
-        if (direction.magnitude > 2 * currentSpeed * Time.fixedDeltaTime) {
-            direction.Normalize();
-            direction.Scale(Vector3.one * currentSpeed);
-            currentSpeed += accel * Time.fixedDeltaTime;
+        if (isMovingToEnemy) {
+            direction = transform.position - destination;
+            direction.y = 0;
+            float magnitude = direction.magnitude;
+            if (magnitude <= attackRange + 0.5f) {
+                AttemptAttack();
+            }
         }
-        else {
-            currentSpeed = direction.magnitude;
-
-            if (currentSpeed > maxSpeed)
-                currentSpeed = maxSpeed;
-        }
-
-        velocity = Vector3.Slerp(velocity, direction, 0.5f);
-        if (velocity.magnitude > maxSpeed) {
-            velocity.Normalize();
-            velocity *= maxSpeed;
-        }
-
-        if (velocity.magnitude > 0)
-            transform.rotation = Quaternion.LookRotation(velocity, Vector3.up);
-        GetComponent<CharacterController>().SimpleMove(velocity);
     }
 }

@@ -14,7 +14,15 @@ public class PlayerMovement : MonoBehaviour {
     public float maxSpeed = 15.0f;
     private Vector3 velocity;
 
-    public float attackRange = 1.0f;
+    public float attackRange {
+        get {
+            if (!isMovingToEnemy) {
+                return 0;
+            }
+            return radius + targetedEnemy.radius;
+        }
+    }
+    public float radius = 0.5f;
     public float attackSpeed = 1.0f;
     private float lastAttack = 0;
 
@@ -45,9 +53,10 @@ public class PlayerMovement : MonoBehaviour {
         lastAttack = Time.time;
     }
 
-    GameObject CreateMoveIndicator(Vector3 position, bool isPersistent = false) {
+    GameObject CreateMoveIndicator(Vector3 position, bool isPersistent = false, float scale = 1.0f) {
         GameObject indicator = GameObject.Instantiate(moveIndicator);
         indicator.transform.position = position;
+        indicator.transform.localScale = new Vector3(scale, scale, 1);
         indicator.GetComponent<ShrinkToDeath>().enabled = !isPersistent;
 
         return indicator;
@@ -90,7 +99,13 @@ public class PlayerMovement : MonoBehaviour {
                 }
 
                 // Create an indicator under the enemy
-                eIndicator = CreateMoveIndicator(enemyPosition, true);
+                eIndicator = CreateMoveIndicator(enemyPosition, true, targetedEnemy.radius + 1.0f);
+
+                // Did we already have a target?
+                if (isMovingToEnemy) {
+                    destination = eIndicator.transform.position;
+                }
+
                 return true;
             }
         }
@@ -115,9 +130,11 @@ public class PlayerMovement : MonoBehaviour {
 
         // For moving towards enemies, maintain a distance between
         float magnitude = direction.magnitude;
-        if (magnitude - (isMovingToEnemy ? attackRange : 0) < 0.5f) {
+        if (magnitude - attackRange < 0.5f) {
+            if (isMovingToEnemy) {
+                transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            }
             GetComponent<Animator>().SetFloat("moveSpeed", 0);
-            //transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
             return;
         }
 
@@ -130,18 +147,6 @@ public class PlayerMovement : MonoBehaviour {
         transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
         GetComponent<Animator>().SetFloat("moveSpeed", moveSpeed);
         GetComponent<CharacterController>().SimpleMove(direction);
-
-        // Normalize to the attack radius
-        if (isMovingToEnemy) {
-            direction = transform.position - destination;
-            direction.y = 0;
-            magnitude = direction.magnitude;
-            if (magnitude <= attackRange) {
-                direction.Normalize();
-
-                GetComponent<CharacterController>().SimpleMove(destination + direction * attackRange);
-            }
-        }
     }
 
     // Update is called once per frame

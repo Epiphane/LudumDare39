@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour {
 
     public int health;
+    public float radius = 1.0f;
 
     // Don't kill dummies
     public bool isDummy;

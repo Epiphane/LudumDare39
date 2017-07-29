@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Item
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - Ground
   - Interactable
-  - 
+  - FireLayer
   - 
   - 
   - 

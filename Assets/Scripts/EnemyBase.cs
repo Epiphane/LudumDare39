@@ -7,7 +7,12 @@ public class EnemyBase : MonoBehaviour {
     public int maxHealth;
     private int _currentHealth;
     public int currentHealth { get { return _currentHealth; } }
+    public bool isDead { get { return !isDummy && _currentHealth < 0; } }
     public float radius = 1.0f;
+
+    // Let the bodies hit the floor
+    private float timeSpentDead = 0;
+    public float timeUntilExpire = 10.0f;
 
     // Don't kill dummies
     public bool isDummy;
@@ -19,6 +24,10 @@ public class EnemyBase : MonoBehaviour {
         if (isDummy) {
             damageCoodown = 3.0f;
         }
+
+        if (_currentHealth < 0) {
+            _currentHealth = 0;
+        }
     }
 
     public void Heal (int damage) {
@@ -29,7 +38,13 @@ public class EnemyBase : MonoBehaviour {
 	void Start () {
         _currentHealth = maxHealth;
     }
-	
+
+    void Die() {
+        GetComponent<Animator>().SetBool("dead", true);
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<CharacterController>().enabled = false;
+    }
+
 	// Update is called once per frame
 	void Update () {
 		if (isDummy) {
@@ -46,8 +61,14 @@ public class EnemyBase : MonoBehaviour {
             return;
         }
 
-        if (currentHealth < 0) {
-            GameObject.Destroy(gameObject);
+        if (isDead) {
+            Die();
+
+            timeSpentDead += Time.deltaTime;
+
+            if (timeSpentDead >= timeUntilExpire) {
+                GameObject.Destroy(gameObject);
+            }
         }
 	}
 }

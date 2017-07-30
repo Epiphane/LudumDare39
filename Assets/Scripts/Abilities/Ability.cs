@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Ability : MonoBehaviour {
 
     public float cooldown = 1.0f;
-    public float lastCast = 0.0f;
+    private float lastCast = 0;
     public bool isOffCooldown {
         get {
             return Time.time > lastCast + cooldown || lastCast == 0;

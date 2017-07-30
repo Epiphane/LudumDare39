@@ -8,7 +8,7 @@ public class EnemyBase : MonoBehaviour {
     public int maxHealth;
     private int _currentHealth;
     public int currentHealth { get { return _currentHealth; } }
-    public bool isDead { get { return !isDummy && _currentHealth < 0; } }
+    public bool isDead { get { return !isDummy && _currentHealth <= 0; } }
     public float radius = 1.0f;
 
     // Let the bodies hit the floor
@@ -51,8 +51,10 @@ public class EnemyBase : MonoBehaviour {
 
     void Die() {
         GetComponent<Animator>().SetBool("dead", true);
-        GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<CharacterController>().enabled = false;
+        //GetComponent<Rigidbody>().useGravity = false;
+        //GetComponent<CharacterController>().enabled = false;
+        GetComponent<CharacterController>().height = 0;
+        GetComponent<CharacterController>().radius = 0.2f;
     }
 
 	// Update is called once per frame

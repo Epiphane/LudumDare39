@@ -7,6 +7,7 @@ public class PlayerSpells : MonoBehaviour {
     public enum Spell {
         BasicAttack,
         Fireball, // Q
+        Flamestrike, // W
         None
     };
 
@@ -20,11 +21,13 @@ public class PlayerSpells : MonoBehaviour {
     public Transform indicatorRoot;
 
     public Spell qSpell;
+    public Spell wSpell;
 
     public GameObject fireballIndicator;
+    public GameObject flamestrikeIndicator;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 
@@ -34,6 +37,9 @@ public class PlayerSpells : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
             IndicateAbility(qSpell);
+        }
+        if (Input.GetKeyDown(KeyCode.W)) {
+            IndicateAbility(wSpell);
         }
 
         if (currentSpell != null) {
@@ -90,6 +96,9 @@ public class PlayerSpells : MonoBehaviour {
         case Spell.Fireball:
             currentSpell = GameObject.Instantiate(fireballIndicator, indicatorRoot);
             break;
+        case Spell.Flamestrike:
+            currentSpell = GameObject.Instantiate(flamestrikeIndicator, indicatorRoot);
+            break;
         default:
             Debug.Log("Indicating nothing :O");
             break;
@@ -112,6 +121,9 @@ public class PlayerSpells : MonoBehaviour {
             break;
         case Spell.Fireball:
             GetComponent<Fireball>().Cast(point);
+            break;
+        case Spell.Flamestrike:
+            GetComponent<Flamestrike>().Cast(point);
             break;
         default:
             Debug.Log("Casting nothing :O");

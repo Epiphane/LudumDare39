@@ -95,7 +95,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parents:
   - {fileID: 0}
-  kids: []
+  kids:
+  - {fileID: 0}
+  state: 0
   tooltip: {fileID: 1958361972132454}
 --- !u!114 &114624926759862390
 MonoBehaviour:

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyBase : MonoBehaviour {
 
@@ -34,6 +35,9 @@ public class EnemyBase : MonoBehaviour {
         }
 
         GameObject dmg = GameObject.Instantiate(damageText, damageTextRoot.position, damageTextRoot.rotation);
+        TextMeshPro tmp = dmg.GetComponent<TextMeshPro>();
+
+        tmp.text = damage + "";
     }
 
     public void Heal (int damage) {

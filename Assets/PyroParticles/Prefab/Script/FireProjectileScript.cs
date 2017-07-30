@@ -8,7 +8,7 @@ namespace DigitalRuby.PyroParticles
     /// </summary>
     /// <param name="script">Script</param>
     /// <param name="pos">Position</param>
-    public delegate void FireProjectileCollisionDelegate(FireProjectileScript script, Vector3 pos);
+    public delegate void FireProjectileCollisionDelegate(FireProjectileScript script, Vector3 pos, GameObject other);
 
     /// <summary>
     /// This script handles a projectile such as a fire ball
@@ -101,7 +101,7 @@ namespace DigitalRuby.PyroParticles
                 FireBaseScript.CreateExplosion(c.contacts[0].point, ProjectileExplosionRadius, ProjectileExplosionForce);
                 if (CollisionDelegate != null)
                 {
-                    CollisionDelegate(this, c.contacts[0].point);
+                    CollisionDelegate(this, c.contacts[0].point, c.collider.gameObject);
                 }
             }
         }

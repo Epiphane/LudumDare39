@@ -2039,7 +2039,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!95 &95624808233835494
 Animator:
@@ -2123,8 +2123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0bdfc9dbcfd6b8478ef66b9974fd9ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 40
   radius: 0.5
+  timeUntilExpire: 10
   isDummy: 1
 --- !u!114 &114459927542094628
 MonoBehaviour:
@@ -2315,7 +2316,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.75
-  m_Radius: 0.5
+  m_Radius: 0.63
   m_SlopeLimit: 45
   m_StepOffset: 0.5
   m_SkinWidth: 0.08
@@ -2382,5 +2383,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -250, y: 0}
-  m_SizeDelta: {x: 300, y: 100}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0, y: 0.5}

@@ -5,14 +5,9 @@ using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour {
 
-    private float delay = 0.3f;
-    private float clickTime = 0;
-
     public float speed = 15.0f;
     public float accel = 1.0f;
-    private float currentSpeed = 0;
     public float maxSpeed = 15.0f;
-    private Vector3 velocity;
 
     public float attackRange {
         get {
@@ -38,7 +33,6 @@ public class PlayerMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        velocity = Vector3.zero;
     }
 
     private string Select = "Fire1";
@@ -65,8 +59,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     /* Returns true if an enemy got targeted */
-    bool IssueMove() {
-        bool didSelectSomething = AttemptSelect();
+    bool IssueMove(bool isDrag = false) {
+        bool didSelectSomething = isDrag ? false : AttemptSelect();
 
         if (didSelectSomething) {
             destination = eIndicator.transform.position;
@@ -79,7 +73,15 @@ public class PlayerMovement : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 100, layer_mask)) {
                 destination = hit.point;
             }
+
             isMovingToEnemy = false;
+            if (eIndicator != null) {
+                Vector3 offFromEnemy = eIndicator.transform.position - destination;
+                if (offFromEnemy.magnitude < 1.0f) {
+                    destination = eIndicator.transform.position;
+                    isMovingToEnemy = true;
+                }
+            }
         }
 
         return didSelectSomething;
@@ -124,7 +126,7 @@ public class PlayerMovement : MonoBehaviour {
         float timeBetweenAttacks = 1.0f / attackSpeed;
 
         if (Time.time > lastAttack + timeBetweenAttacks) {
-            GetComponent<Animator>().SetTrigger("fireballThrow");
+            GetComponent<Animator>().SetTrigger("basicAttack");
 
             lastAttack = Time.time;
             isAttacking = true;
@@ -132,7 +134,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void MoveToDestination() {
-        if (isAttacking) {
+        PlayerSpells spells = GetComponent<PlayerSpells>();
+        if (isAttacking || (spells != null && spells.isCasting)) {
             return;
         }
 
@@ -159,31 +162,43 @@ public class PlayerMovement : MonoBehaviour {
         GetComponent<Animator>().SetFloat("moveSpeed", moveSpeed);
         GetComponent<CharacterController>().SimpleMove(direction);
     }
-
-    // Update is called once per frame
+    
     void FixedUpdate () {
-        if (Input.GetButtonDown(Select)) {
+        if (targetedEnemy != null) {
+            if (targetedEnemy.isDead) {
+                targetedEnemy = null;
+                GameObject.Destroy(eIndicator);
+                eIndicator = null;
+                isMovingToEnemy = false;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && eIndicator != null) {
+            // GO back to attacking
+            destination = eIndicator.transform.position;
+            isMovingToEnemy = true;
+        }
+
+        PlayerSpells spells = GetComponent<PlayerSpells>();
+        if (Input.GetButtonDown(Select) && (spells == null || !spells.isCasting)) {
             AttemptSelect();
         }
 
         if (Input.GetButtonDown(Move)) {
-            clickTime = Time.time;
             IssueMove();
         }
         if (Input.GetButtonUp(Move)) {
-            if (Time.time - clickTime <= delay) {
-                // Click
-                IssueMove();
+            // Click
+            IssueMove();
 
+            if (!isMovingToEnemy) {
                 // Create an indicator of where you're moving
                 CreateMoveIndicator(destination + Vector3.up * 0.1f);
             }
         }
         if (Input.GetButton(Move)) {
-            if (Time.time - clickTime > delay) {
-                // Drag
-                IssueMove();
-            }
+            // Drag
+            IssueMove(true);
         }
 
         MoveToDestination();

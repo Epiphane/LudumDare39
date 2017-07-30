@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour {
     public float radius = 0.5f;
     public float attackSpeed = 1.0f;
     private float lastAttack = 0;
-    private bool isAttacking = false;
 
     // Enemy targeting
     private EnemyBase targetedEnemy = null;
@@ -31,8 +30,12 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 destination;
     public GameObject moveIndicator;
 
+    // Direction stuff
+    private DirectionSmoother director;
+
     // Use this for initialization
     void Start () {
+        director = GetComponent<DirectionSmoother>();
     }
 
     private string Select = "Fire1";
@@ -42,11 +45,6 @@ public class PlayerMovement : MonoBehaviour {
         if (targetedEnemy != null) {
             // DO damage
         }
-    }
-
-    void BasicAttackComplete() {
-        targetedEnemy.TakeDamage(30);
-        isAttacking = false;
     }
 
     GameObject CreateMoveIndicator(Vector3 position, bool isPersistent = false, float scale = 1.0f) {
@@ -77,7 +75,7 @@ public class PlayerMovement : MonoBehaviour {
             isMovingToEnemy = false;
             if (eIndicator != null) {
                 Vector3 offFromEnemy = eIndicator.transform.position - destination;
-                if (offFromEnemy.magnitude < 1.0f) {
+                if (offFromEnemy.magnitude < 2.0f) {
                     destination = eIndicator.transform.position;
                     isMovingToEnemy = true;
                 }
@@ -119,23 +117,18 @@ public class PlayerMovement : MonoBehaviour {
 
     // Attempt to attack
     void AttemptAttack() {
-        if (isAttacking) {
-            return;
-        }
-
-        float timeBetweenAttacks = 1.0f / attackSpeed;
-
-        if (Time.time > lastAttack + timeBetweenAttacks) {
-            GetComponent<Animator>().SetTrigger("basicAttack");
-
-            lastAttack = Time.time;
-            isAttacking = true;
+        PlayerSpells spells = GetComponent<PlayerSpells>();
+        BasicAttack attack = GetComponent<BasicAttack>();
+        if (spells != null && !spells.isCasting) {
+            attack.targetedEnemy = targetedEnemy;
+            spells.BasicAttack();
         }
     }
 
     void MoveToDestination() {
         PlayerSpells spells = GetComponent<PlayerSpells>();
-        if (isAttacking || (spells != null && spells.isCasting)) {
+        if (spells != null && spells.isCasting) {
+            GetComponent<Animator>().SetFloat("moveSpeed", 0);
             return;
         }
 
@@ -146,7 +139,7 @@ public class PlayerMovement : MonoBehaviour {
         float magnitude = direction.magnitude;
         if (magnitude - attackRange < 0.5f) {
             if (isMovingToEnemy) {
-                transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+                director.IWantToFace(direction);
             }
             GetComponent<Animator>().SetFloat("moveSpeed", 0);
             return;
@@ -158,7 +151,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         float moveSpeed = direction.magnitude;
-        transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        director.IWantToFace(direction);
         GetComponent<Animator>().SetFloat("moveSpeed", moveSpeed);
         GetComponent<CharacterController>().SimpleMove(direction);
     }
@@ -173,14 +166,14 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && eIndicator != null) {
+        if (Input.GetKey(KeyCode.Space) && eIndicator != null) {
             // GO back to attacking
             destination = eIndicator.transform.position;
             isMovingToEnemy = true;
         }
 
         PlayerSpells spells = GetComponent<PlayerSpells>();
-        if (Input.GetButtonDown(Select) && (spells == null || !spells.isCasting)) {
+        if (Input.GetButtonDown(Select) && (spells == null || !spells.isIndicating)) {
             AttemptSelect();
         }
 

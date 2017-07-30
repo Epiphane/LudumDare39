@@ -4864,6 +4864,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4465191815059398, guid: ad8d159e42a48cc4b88d4359fe000642, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad8d159e42a48cc4b88d4359fe000642, type: 2}
   m_IsPrefabParent: 0
@@ -6291,8 +6295,10 @@ GameObject:
   - component: {fileID: 1660364081}
   - component: {fileID: 1660364083}
   - component: {fileID: 1660364084}
+  - component: {fileID: 1660364087}
   - component: {fileID: 1660364079}
   - component: {fileID: 1660364080}
+  - component: {fileID: 1660364086}
   m_Layer: 0
   m_Name: Paladin_J_Nordstrom
   m_TagString: Untagged
@@ -6311,11 +6317,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87555a9cef890a34196ec45554779d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isIndicating: 1
-  _isCasting: 0
-  currentSpell: {fileID: 0}
+  _isIndicating: 2
   indicatorRoot: {fileID: 102306670}
-  qSpell: 0
+  qSpell: 1
   fireballIndicator: {fileID: 1399760664350856, guid: 0df9fb60f82f5cb41acd390c3f4fa873,
     type: 2}
 --- !u!114 &1660364080
@@ -6329,6 +6333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b46b3605fdf600489e08f97395f4eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 2
+  lastCast: 0
   fireballPrefab: {fileID: 1879638150564762, guid: 80618055faf38154c83ea5417ab0efa8,
     type: 2}
 --- !u!114 &1660364081
@@ -6416,6 +6422,33 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1660364086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1660364078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a68782b14da63c4fa8ef4254689af04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1
+  lastCast: 0
+  targetedEnemy: {fileID: 0}
+--- !u!114 &1660364087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1660364078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec2ca3eb6f0a9548a3a7dcb4b101cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0, z: 0, w: 0}
+  smoothing: 0.2
 --- !u!1 &1668468656
 GameObject:
   m_ObjectHideFlags: 0
@@ -6619,7 +6652,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 80.6
+  field of view: 66.5
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -6643,13 +6676,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1739540222}
-  m_LocalRotation: {x: 0.51605284, y: 0.2847645, z: -0.18698837, w: 0.7858969}
-  m_LocalPosition: {x: -1.02, y: 5.89, z: -1.43}
+  m_LocalRotation: {x: 0.4694715, y: 0, z: 0, w: 0.8829476}
+  m_LocalPosition: {x: -0.05, y: 9.6, z: -5.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 66.581, y: 39.835003, z: 0}
+  m_LocalEulerAnglesHint: {x: 56, y: 0, z: 0}
 --- !u!114 &1739540230
 MonoBehaviour:
   m_ObjectHideFlags: 0

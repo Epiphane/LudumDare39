@@ -5,15 +5,18 @@ using UnityEngine;
 public class PlayerSpells : MonoBehaviour {
 
     public enum Spell {
+        BasicAttack,
         Fireball, // Q
         None
     };
 
+    private GameObject currentSpell;
+
     // For telling the PlayerMovement component that we're in the middle of something duuuuude
-    public Spell _isIndicating = Spell.None; // Spell index
     public bool isCasting { get { return _isCasting; } }
-    public bool _isCasting;
-    public GameObject currentSpell;
+    public bool isIndicating { get { return _isIndicating != Spell.None; } }
+    public Spell _isIndicating = Spell.None; // Spell index
+    private bool _isCasting;
     public Transform indicatorRoot;
 
     public Spell qSpell;
@@ -54,10 +57,26 @@ public class PlayerSpells : MonoBehaviour {
         }
     }
 
-    void IndicateAbility(Spell ability) {
+    public bool CanCast(Spell ability) {
+        switch (ability) {
+        case Spell.BasicAttack:
+            return GetComponent<BasicAttack>().isOffCooldown;
+        case Spell.Fireball:
+            return GetComponent<Fireball>().isOffCooldown;
+        default:
+            return true;
+        }
+    }
+
+    /* Returns whether or not the ability is ready for casting */
+    public bool IndicateAbility(Spell ability) {
         if (_isIndicating == ability) {
             // TODO Cancel spell on pressing the letter again?
-            return;
+            return true;
+        }
+
+        if (!CanCast(ability)) {
+            return false;
         }
 
         if (currentSpell != null) {
@@ -66,18 +85,31 @@ public class PlayerSpells : MonoBehaviour {
         }
 
         switch (_isIndicating = ability) {
+        case Spell.BasicAttack:
+            break; // No indicator
         case Spell.Fireball:
             currentSpell = GameObject.Instantiate(fireballIndicator, indicatorRoot);
             break;
         default:
             Debug.Log("Indicating nothing :O");
-            return;
+            break;
+        }
+
+        return true;
+    }
+
+    public void BasicAttack() {
+        if (CanCast(Spell.BasicAttack)) {
+            GetComponent<BasicAttack>().Cast(Vector3.zero);
         }
     }
 
-    void CastAbility(Vector3 point) {
+    public void CastAbility(Vector3 point) {
         _isCasting = true;
         switch (_isIndicating) {
+        case Spell.BasicAttack:
+            GetComponent<BasicAttack>().Cast(Vector3.zero);
+            break;
         case Spell.Fireball:
             GetComponent<Fireball>().Cast(point);
             break;

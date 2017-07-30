@@ -18,6 +18,10 @@ public class EnemyBase : MonoBehaviour {
     public bool isDummy;
     private float damageCoodown;
 
+    // Damage :(
+    public Transform damageTextRoot;
+    public GameObject damageText;
+
     public void TakeDamage (int damage) {
         _currentHealth -= damage;
 
@@ -28,6 +32,8 @@ public class EnemyBase : MonoBehaviour {
         if (_currentHealth < 0) {
             _currentHealth = 0;
         }
+
+        GameObject dmg = GameObject.Instantiate(damageText, damageTextRoot.position, damageTextRoot.rotation);
     }
 
     public void Heal (int damage) {

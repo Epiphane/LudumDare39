@@ -6944,7 +6944,7 @@ GameObject:
   - component: {fileID: 1660364088}
   m_Layer: 0
   m_Name: Paladin_J_Nordstrom
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7167,7 +7167,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1668802531}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27182d13e4191734692119cd31197653, type: 3}
   m_Name: 

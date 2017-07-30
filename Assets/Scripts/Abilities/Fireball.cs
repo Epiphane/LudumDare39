@@ -6,6 +6,7 @@ using DigitalRuby.PyroParticles;
 
 public class Fireball : Ability {
 
+    public GameObject indicatorPrefab;
     public GameObject fireballPrefab;
 
     // Use this for initialization
@@ -29,7 +30,7 @@ public class Fireball : Ability {
 
         castDirection = mouse - transform.position;
         castDirection.y = 0;
-
+        
         GetComponent<DirectionSmoother>().IWantToFace(castDirection);
     }
 

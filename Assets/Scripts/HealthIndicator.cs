@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class HealthIndicator : MonoBehaviour {
 
-    public EnemyBase myInfo;
+    public UnitWithHealth myInfo;
 
 	// Use this for initialization
 	void Start () {
-        myInfo = transform.parent.parent.GetComponent<EnemyBase>();
+        if (myInfo == null) {
+            myInfo = transform.parent.parent.GetComponent<UnitWithHealth>();
+        }
 
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.localScale = new Vector2(500.0f / myInfo.maxHealth, 1);

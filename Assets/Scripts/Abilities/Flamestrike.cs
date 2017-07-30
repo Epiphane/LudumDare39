@@ -6,6 +6,7 @@ using DigitalRuby.PyroParticles;
 
 public class Flamestrike : Ability {
 
+    public GameObject indicatorPrefab;
     public GameObject flamestrikePrefab;
 
     // Use this for initialization

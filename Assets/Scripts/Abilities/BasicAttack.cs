@@ -21,7 +21,7 @@ public class BasicAttack : Ability {
     }
 
     [HideInInspector]
-    public EnemyBase targetedEnemy;
+    public UnitWithHealth targetedEnemy;
 
     public override void DoCast(Vector3 mouse) {
         // Animate the fireball

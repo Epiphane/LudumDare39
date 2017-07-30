@@ -20,7 +20,7 @@ public class Fireball : Ability {
 
     private Vector3 castDirection;
 
-    public override void Cast(Vector3 mouse) {
+    public override void DoCast(Vector3 mouse) {
         // Animate the fireball
         Animator anim = GetComponent<Animator>();
         if (anim != null) {
@@ -30,15 +30,15 @@ public class Fireball : Ability {
         castDirection = mouse - transform.position;
         castDirection.y = 0;
 
-        transform.rotation = Quaternion.LookRotation(castDirection, Vector3.up);
+        GetComponent<DirectionSmoother>().IWantToFace(castDirection);
     }
 
     void FireballComplete() {
         GameObject fireball = GameObject.Instantiate(fireballPrefab);
         fireball.transform.position = transform.position + Vector3.up + castDirection.normalized;
+        fireball.transform.rotation = Quaternion.LookRotation(castDirection, Vector3.up);
 
         FireProjectileScript projectile = fireball.GetComponent<FireProjectileScript>();
-        fireball.transform.rotation = Quaternion.LookRotation(castDirection, Vector3.up);
         projectile.CollisionDelegate = Collide;
 
         GetComponent<PlayerSpells>().DoneCasting();

@@ -39,6 +39,7 @@ public class Volley : Ability {
             ProjectileScript projectile = arrow.GetComponent<ProjectileScript>();
             projectile.onCollision = Collide;
             projectile.velocity = 12.0f * direction;
+            projectile.life = 0.65f;
         }
 
         GetComponent<UnitSpells>().DoneCasting();

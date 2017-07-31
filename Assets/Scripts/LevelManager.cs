@@ -32,10 +32,17 @@ public class LevelManager : MonoBehaviour {
     public void SpawnLevel() {
         Level lvl = levels[currentLevel];
 
+        if (lvl.enemies == null) {
+            win.SetActive(true);
+            return;
+        }
+
         GameObject go = GameObject.Instantiate(lvl.enemies);
         WatchEnemies watcher = go.AddComponent<WatchEnemies>();
         watcher.levelManager = this;
     }
+
+    public GameObject win;
 
     public void Advance() {
         Level lvl = levels[currentLevel];

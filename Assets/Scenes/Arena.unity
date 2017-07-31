@@ -21435,6 +21435,42 @@ MonoBehaviour:
     magic: 1
     deception: 0
     strength: 0
+  - enemies: {fileID: 1785387893829112, guid: f8a52f467fffec14eb738ef529ab1437, type: 2}
+    magic: 0
+    deception: 1
+    strength: 2
+  - enemies: {fileID: 1896229157009544, guid: d936cd178ead5504a90159cd9b76df54, type: 2}
+    magic: 1
+    deception: 1
+    strength: 1
+  - enemies: {fileID: 1785387893829112, guid: f8a52f467fffec14eb738ef529ab1437, type: 2}
+    magic: 0
+    deception: 1
+    strength: 2
+  - enemies: {fileID: 1896229157009544, guid: d936cd178ead5504a90159cd9b76df54, type: 2}
+    magic: 0
+    deception: 2
+    strength: 1
+  - enemies: {fileID: 1785387893829112, guid: f8a52f467fffec14eb738ef529ab1437, type: 2}
+    magic: 1
+    deception: 0
+    strength: 2
+  - enemies: {fileID: 1896229157009544, guid: d936cd178ead5504a90159cd9b76df54, type: 2}
+    magic: 3
+    deception: 2
+    strength: 2
+  - enemies: {fileID: 1785387893829112, guid: f8a52f467fffec14eb738ef529ab1437, type: 2}
+    magic: 1
+    deception: 1
+    strength: 1
+  - enemies: {fileID: 1896229157009544, guid: d936cd178ead5504a90159cd9b76df54, type: 2}
+    magic: 1
+    deception: 1
+    strength: 1
+  - enemies: {fileID: 1785387893829112, guid: f8a52f467fffec14eb738ef529ab1437, type: 2}
+    magic: 1
+    deception: 1
+    strength: 0
   currentLevel: 0
 --- !u!1001 &1912506307
 Prefab:

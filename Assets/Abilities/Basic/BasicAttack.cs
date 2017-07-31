@@ -2,22 +2,10 @@
 
 public class BasicAttack : Ability {
 
-    // Use this for initialization
+    private UnitMovement myMovement;
+    
     void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-        /*float timeBetweenAttacks = 1.0f / attackSpeed;
-
-        if (Time.time > lastAttack + timeBetweenAttacks) {
-            GetComponent<Animator>().SetTrigger("basicAttack");
-
-            lastAttack = Time.time;
-            isAttacking = true;
-        }*/
+        myMovement = GetComponent<UnitMovement>();
     }
 
     [HideInInspector]
@@ -25,17 +13,14 @@ public class BasicAttack : Ability {
 
     public override void DoCast(Vector3 mouse) {
         // Animate the attack
-        Animator anim = GetComponent<Animator>();
-        if (anim != null) {
-            anim.SetTrigger("basicAttack");
-        }
+        myMovement.animator.SetTrigger("basicAttack");
 
         Vector3 castDirection = targetedEnemy.transform.position - transform.position;
 
-        GetComponent<DirectionSmoother>().IWantToFace(castDirection);
+        myMovement.director.IWantToFace(castDirection);
     }
 
-    void BasicAttackComplete() {
+    public override void Execute() {
         targetedEnemy.TakeDamage(30);
 
         GetComponent<UnitSpells>().DoneCasting();

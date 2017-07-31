@@ -29,4 +29,6 @@ public abstract class Ability : MonoBehaviour {
     }
 
     public abstract void DoCast(Vector3 mouse);
+
+    public abstract void Execute(); // For when the animation hits the magic moment
 }

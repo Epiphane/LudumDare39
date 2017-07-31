@@ -9,24 +9,17 @@ public class Flamestrike : Ability {
     public GameObject indicatorPrefab;
     public GameObject flamestrikePrefab;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private UnitMovement myMovement;
+
+    void Start() {
+        myMovement = GetComponent<UnitMovement>();
+    }
 
     private Vector3 castPosition;
 
     public override void DoCast(Vector3 mouse) {
         // Animate the cast
-        Animator anim = GetComponent<Animator>();
-        if (anim != null) {
-            anim.SetTrigger("brandAttack");
-        }
+        myMovement.animator.SetTrigger("brandAttack");
 
         Vector3 direction = mouse - transform.position;
         direction.y = 0;
@@ -40,15 +33,15 @@ public class Flamestrike : Ability {
         GetComponent<DirectionSmoother>().IWantToFace(direction);
     }
 
-    void FlamestrikeComplete() {
+    public override void Execute() {
         GameObject flamestrike = GameObject.Instantiate(flamestrikePrefab);
         flamestrike.transform.position = castPosition;
 
-        GetComponent<PlayerSpells>().DoneCasting();
+        GetComponent<UnitSpells>().DoneCasting();
     }
 
     void Collide(FireProjectileScript script, Vector3 pos, GameObject other) {
-        EnemyBase enemy = other.GetComponent<EnemyBase>();
+        UnitWithHealth enemy = other.GetComponent<UnitWithHealth>();
         if (enemy != null) {
             enemy.TakeDamage(50);
         }

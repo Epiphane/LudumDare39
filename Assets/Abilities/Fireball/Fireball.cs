@@ -9,32 +9,25 @@ public class Fireball : Ability {
     public GameObject indicatorPrefab;
     public GameObject fireballPrefab;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private UnitMovement myMovement;
+
+    void Start() {
+        myMovement = GetComponent<UnitMovement>();
+    }
 
     private Vector3 castDirection;
 
     public override void DoCast(Vector3 mouse) {
         // Animate the fireball
-        Animator anim = GetComponent<Animator>();
-        if (anim != null) {
-            anim.SetTrigger("fireballThrow");
-        }
+        myMovement.animator.SetTrigger("fireballThrow");
 
         castDirection = mouse - transform.position;
         castDirection.y = 0;
-        
-        GetComponent<DirectionSmoother>().IWantToFace(castDirection);
+
+        myMovement.director.IWantToFace(castDirection);
     }
 
-    void FireballComplete() {
+    public override void Execute() {
         GameObject fireball = GameObject.Instantiate(fireballPrefab);
         fireball.transform.position = transform.position + Vector3.up + castDirection.normalized;
         fireball.transform.rotation = Quaternion.LookRotation(castDirection, Vector3.up);
@@ -42,11 +35,11 @@ public class Fireball : Ability {
         FireProjectileScript projectile = fireball.GetComponent<FireProjectileScript>();
         projectile.CollisionDelegate = Collide;
 
-        GetComponent<PlayerSpells>().DoneCasting();
+        GetComponent<UnitSpells>().DoneCasting();
     }
 
     void Collide(FireProjectileScript script, Vector3 pos, GameObject other) {
-        EnemyBase enemy = other.GetComponent<EnemyBase>();
+        UnitWithHealth enemy = other.GetComponent<UnitWithHealth>();
         if (enemy != null) {
             enemy.TakeDamage(50);
         }

@@ -40,7 +40,7 @@ public class SkillNode : MonoBehaviour {
 			myLabel.color = Color.white;
 			break;
 		case SkillNodeState.CannotDestroy:
-			overlay.color = new Color(0, 0, 0, 0.3f);
+			overlay.color = new Color(0, 0, 0, 0.5f);
 			myLabel.color = Color.gray;
 			break;
 		case SkillNodeState.Destroyed:
@@ -52,6 +52,12 @@ public class SkillNode : MonoBehaviour {
 		}
 	}
 
+    public bool IsDestroyed() {
+        Skill s = SkillManager.currentSkills[skillKey];
+
+        return s.currPoints <= 0;
+    }
+
 	// Update this node's state based on the nodes around it
 	public void UpdateState() {
 		if (state == SkillNodeState.Destroyed) {
@@ -61,7 +67,7 @@ public class SkillNode : MonoBehaviour {
 		SetState(SkillNodeState.CanDestroy);
 
 		foreach (SkillNode p in parents) {
-			if (p.kids.Count == 1) {
+			if (!p.IsDestroyed()) {
 				SetState(SkillNodeState.CannotDestroy);
 				return;
 			}
@@ -80,7 +86,18 @@ public class SkillNode : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        Skill s = SkillManager.currentSkills[skillKey];
+        SkillManager skillManager = GameObject.FindObjectOfType<SkillManager>();
+        if (state == SkillNodeState.CanDestroy) {
+            if (skillManager.NeedsRemoval(s.school)) {
+                // Overlay = 0 alpha
+                overlay.color = Color.clear;
+                myLabel.color = Color.white;
+            } else {
+                overlay.color = new Color(0, 0, 0, 0.4f);
+                myLabel.color = Color.gray;
+            }
+        }
 	}
 
 	public GameObject tooltip;
@@ -95,14 +112,18 @@ public class SkillNode : MonoBehaviour {
 
 	public void SkillChosen() {
 		Skill s = SkillManager.currentSkills [skillKey];
-		if (state != SkillNodeState.CanDestroy) {
-			print ("CAN'T DO IT");
-		} else {
+        SkillManager skillManager = GameObject.FindObjectOfType<SkillManager>();
+        if (state != SkillNodeState.CanDestroy) {
+            print("CAN'T DO IT");
+        }
+        else if (!skillManager.NeedsRemoval(s.school)) {
+            print("CAN'T DO IT");
+        } else {
 			Skill oneLess = s.MinusOne ();
 			SkillManager.currentSkills [skillKey] = oneLess;
 			myLabel.text = oneLess.currPoints.ToString () + "/" + oneLess.maxPoints.ToString ();
 			print ("Howdy " + oneLess.currPoints);
-			GameObject.FindObjectOfType<SkillManager> ().SkillPointDestroyed (s.school);
+			skillManager.SkillPointDestroyed (s.school);
 
 			if (s.currPoints > 1) {
 				tooltip.transform.Find ("tt_text").GetComponent<TMPro.TextMeshProUGUI> ().text = oneLess.tooltip.Replace ("$VALUE", oneLess.GetValue ().ToString ());

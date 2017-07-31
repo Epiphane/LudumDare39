@@ -47,8 +47,10 @@ public class AbilityButton : MonoBehaviour {
     public Image aboveImage;
 
     public void SetTier(int tier) {
-        if (tier < 0)
+        if (tier < 0) {
             transform.parent.gameObject.SetActive(false);
+            return;
+        }
 
         belowImage.sprite = below[tier];
         aboveImage.sprite = above[tier];

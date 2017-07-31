@@ -122,7 +122,6 @@ public class SkillNode : MonoBehaviour {
 			Skill oneLess = s.MinusOne ();
 			SkillManager.currentSkills [skillKey] = oneLess;
 			myLabel.text = oneLess.currPoints.ToString () + "/" + oneLess.maxPoints.ToString ();
-			print ("Howdy " + oneLess.currPoints);
 			skillManager.SkillPointDestroyed (s.school);
 
 			if (s.currPoints > 1) {

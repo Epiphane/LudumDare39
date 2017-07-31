@@ -11,6 +11,9 @@ public class PlayerMovement : UnitMovement {
     // Movement
     public GameObject moveIndicator;
 
+    // Fire poop lol
+    public GameObject moltenTrail;
+
     private string Select = "Fire1";
     private string Move = "Fire2";
 
@@ -75,7 +78,9 @@ public class PlayerMovement : UnitMovement {
 
         return false;
     }
-    
+
+    private float singedTick = 0.25f;
+
     new protected void FixedUpdate () {
         if (target == null) {
             GameObject.Destroy(eIndicator);
@@ -116,5 +121,17 @@ public class PlayerMovement : UnitMovement {
         }
 
         base.FixedUpdate();
+
+        singedTick -= Time.deltaTime;
+        if (singedTick < 0 && SkillManager.currentSkills["molten trail"].currPoints > 0) {
+            Vector3 pos = transform.position;
+            pos.y = 0.5f;
+            GameObject trail = GameObject.Instantiate(moltenTrail, pos, Quaternion.AngleAxis(0, Vector3.up));
+            singedTick += 0.25f;
+
+            DamageArea area = trail.GetComponentInChildren<DamageArea>();
+            area.DPS = new Ability.Stats(10, 0, 10, 0);
+            area.caster = myInfo;
+        }
     }
 }

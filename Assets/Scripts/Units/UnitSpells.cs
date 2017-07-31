@@ -26,11 +26,11 @@ public class UnitSpells : MonoBehaviour {
         case Spell.BasicAttack:
             return GetComponent<BasicAttack>().isOffCooldown;
         case Spell.Flamestrike:
-            return GetComponent<Flamestrike>().isOffCooldown;
+            return GetComponent<Flamestrike>().isOffCooldown && SkillManager.currentSkills["flamestrike"].currPoints > 0;
         case Spell.Fireball:
-            return GetComponent<Fireball>().isOffCooldown;
+            return GetComponent<Fireball>().isOffCooldown && SkillManager.currentSkills["fireball"].currPoints > 0;
         case Spell.Volley:
-            return GetComponent<Volley>().isOffCooldown;
+            return GetComponent<Volley>().isOffCooldown && SkillManager.currentSkills["volley"].currPoints > 0;
         default:
             return true;
         }

@@ -22,9 +22,14 @@ public abstract class Ability : MonoBehaviour {
 
     public float cooldown = 1.0f;
     private float lastCast = 0;
+    public float LolCooldown() {
+        if (gameObject.tag == "Player" && SkillManager.currentSkills["cooldown"].currPoints > 0)
+            return cooldown * 0.9f;
+        return cooldown;
+    }
     public bool isOffCooldown {
         get {
-            return Time.time > lastCast + cooldown || lastCast == 0;
+            return Time.time > lastCast + LolCooldown() || lastCast == 0;
         }
     }
 

@@ -54,8 +54,5 @@ public class AbilityButton : MonoBehaviour {
 
         belowImage.sprite = below[tier];
         aboveImage.sprite = above[tier];
-
-        RectTransform parent = transform.parent.GetComponentInParent<RectTransform>();
-        parent.position = new Vector3(parent.position.x, 25 + 10 * tier, parent.position.z);
     }
 }

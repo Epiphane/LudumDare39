@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySimpleAttackAI : MonoBehaviour {
 
-    public float detectionRadius = 5.0f;
+    public float detectionRadius = 15.0f;
 
     private UnitMovement movement;
 
@@ -23,7 +23,10 @@ public class EnemySimpleAttackAI : MonoBehaviour {
         }
 
         if (!movement.isMovingToTarget) {
-            Collider[] overlaps = Physics.OverlapSphere(transform.position, detectionRadius);
+            float r = detectionRadius;
+            if (SkillManager.currentSkills["light steps"].currPoints > 0)
+                r /= 3;
+            Collider[] overlaps = Physics.OverlapSphere(transform.position, r);
 
             foreach (Collider overlap in overlaps) {
                 if (overlap.tag == "Player") {

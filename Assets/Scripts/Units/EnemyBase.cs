@@ -9,18 +9,18 @@ public class EnemyBase : UnitWithHealth {
 
     // Let the bodies hit the floor
     private float timeSpentDead = 0;
-    public float timeUntilExpire = 10.0f;
+    public float timeUntilExpire = 5.0f;
 
     // Don't kill dummies
     public bool isDummy;
     private float damageCoodown;
 
-    new public void TakeDamage (int damage) {
+    new public void TakeDamage (int damage, UnitWithHealth from) {
         if (isDummy) {
             damageCoodown = 3.0f;
         }
 
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, from);
     }
 
 	// Update is called once per frame

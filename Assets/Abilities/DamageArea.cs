@@ -70,6 +70,7 @@ public class DamageArea : MonoBehaviour {
         _duration -= Time.deltaTime;
         if (_duration < 0) {
             render.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+            GameObject.Destroy(transform.parent.gameObject);
             return;
         }
 
@@ -89,7 +90,7 @@ public class DamageArea : MonoBehaviour {
                 EnemyBase enemy = overlap.GetComponent<EnemyBase>();
 
                 if (enemy != null) {
-                    enemy.TakeDamage(caster.ComputeDamage(enemy, DPS) / 4);
+                    enemy.TakeDamage(caster.ComputeDamage(enemy, DPS) / 4, caster);
                 }
             }
         }

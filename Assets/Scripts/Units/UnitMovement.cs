@@ -33,7 +33,7 @@ public class UnitMovement : MonoBehaviour {
 
     // Character controller
     private CharacterController charController;
-    private UnitWithHealth myInfo;
+    protected UnitWithHealth myInfo;
 
     // Use this for initialization
     void Start () {

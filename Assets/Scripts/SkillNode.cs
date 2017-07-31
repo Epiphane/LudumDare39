@@ -74,6 +74,8 @@ public class SkillNode : MonoBehaviour {
 		tooltip.transform.Find("tt_text").GetComponent<TMPro.TextMeshProUGUI>().text = s.tooltip.Replace ("$VALUE", s.GetValue().ToString());
 
 		myLabel.text = s.currPoints.ToString () + "/" + s.maxPoints.ToString ();
+
+        tooltip.transform.parent = transform.parent;
 	}
 	
 	// Update is called once per frame

@@ -25,6 +25,9 @@ public class DirectionSmoother : MonoBehaviour {
     public void IWantToFace(Vector3 _direction) {
         _direction.y = 0;
 
+        if (_direction.magnitude == 0)
+            return;
+
         direction = Quaternion.LookRotation(_direction, Vector3.up);
     }
 }

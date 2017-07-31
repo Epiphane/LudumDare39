@@ -11,6 +11,21 @@ public class UnitWithHealth : MonoBehaviour {
     public bool isDead { get { return _currentHealth <= 0; } }
     public float radius = 1.0f;
 
+    // Stats
+    // b_ prefix means base value. Don't change this unless you're fundamentally changing the unit
+    public int b_moveSpeed = 100; // Normal walking speed == 100
+    public int b_strength = 0; // Physical damage
+    public int b_intelligence = 0; // Magic damage
+    public int b_armor = 0; // Physical resistance
+    public int b_magicResist = 0; // I wonder what this could be
+
+    // This is where the magic happens
+    public float moveSpeed { get { return b_moveSpeed; } }
+    public float strength { get { return b_strength; } }
+    public float intelligence { get { return b_intelligence; } }
+    public float armor { get { return b_armor; } }
+    public float magicResist { get { return b_magicResist; } }
+
     // Damage :(
     public Transform damageTextRoot;
     public GameObject damageText;
@@ -32,6 +47,27 @@ public class UnitWithHealth : MonoBehaviour {
 
         tmp.color = Color.red;
         tmp.text = damage + "";
+    }
+
+    public int ComputeDamage(UnitWithHealth other, Ability.Stats stats) {
+        float physical = stats.basePhysical + stats.scalingPhysical * strength;
+        float magic    = stats.baseMagic    + stats.scalingMagic    * intelligence;
+
+        float armor = other.armor;
+        float magicResist = other.magicResist;
+
+        Debug.Log(physical);
+        Debug.Log(armor);
+
+        // lol http://leagueoflegends.wikia.com/wiki/Armor
+        physical *= 100 / (100 + armor);
+        magic *= 100 / (100 + magicResist);
+
+        return (int) (physical + magic);
+    }
+
+    public void DealDamage(UnitWithHealth other, Ability.Stats stats) {
+        other.TakeDamage(ComputeDamage(other, stats));
     }
 
     public void Heal (int damage) {

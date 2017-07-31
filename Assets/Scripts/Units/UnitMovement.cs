@@ -5,9 +5,7 @@ using UnityEngine.AI;
 
 public class UnitMovement : MonoBehaviour {
 
-    public float speed = 10.0f;
     public float accel = 4.0f;
-    public float maxSpeed = 2.0f;
 
     public float attackRange {
         get {
@@ -132,9 +130,10 @@ public class UnitMovement : MonoBehaviour {
             return;
         }
 
-        if (direction.magnitude > maxSpeed / 2) {
+        float maxSpeed = myInfo.moveSpeed / 50;
+        if (direction.magnitude > maxSpeed) {
             direction.Normalize();
-            direction *= maxSpeed / 2;
+            direction *= maxSpeed;
         }
 
         float moveSpeed = direction.magnitude;

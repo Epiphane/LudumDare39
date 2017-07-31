@@ -4,6 +4,22 @@ using UnityEngine;
 
 public abstract class Ability : MonoBehaviour {
 
+    public class Stats {
+        public int basePhysical;
+        public float scalingPhysical;
+        public int baseMagic;
+        public float scalingMagic;
+
+        public Stats(int basePhysical, float scalingPhysical, int baseMagic, float scalingMagic) {
+            this.basePhysical    = basePhysical;
+            this.scalingPhysical = scalingPhysical;
+            this.baseMagic       = baseMagic;
+            this.scalingMagic    = scalingMagic;
+        }
+    };
+
+    protected UnitWithHealth caster;
+
     public float cooldown = 1.0f;
     private float lastCast = 0;
     public bool isOffCooldown {
@@ -13,8 +29,8 @@ public abstract class Ability : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
-		
+	public void Awake () {
+        caster = GetComponent<UnitWithHealth>();
 	}
 	
 	// Update is called once per frame

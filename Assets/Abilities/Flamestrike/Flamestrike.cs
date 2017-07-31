@@ -6,6 +6,15 @@ using DigitalRuby.PyroParticles;
 
 public class Flamestrike : Ability {
 
+    Stats[] levels = {
+        new Stats(0, 0, 0, 0),
+        new Stats(0, 0, 50, 0.5f),
+        new Stats(0, 0, 50, 0.6f),
+        new Stats(0, 0, 50, 0.7f)
+    };
+
+    float[] scale = { 0, 0.5f, 1.0f, 1.5f };
+
     public GameObject indicatorPrefab;
     public GameObject flamestrikePrefab;
 
@@ -34,16 +43,16 @@ public class Flamestrike : Ability {
     }
 
     public override void Execute() {
+        int points = SkillManager.currentSkills["flamestrike"].currPoints;
+
         GameObject flamestrike = GameObject.Instantiate(flamestrikePrefab);
         flamestrike.transform.position = castPosition;
+        flamestrike.transform.localScale = new Vector3(scale[points], 1, scale[points]);
+
+        DamageArea damager = flamestrike.GetComponentInChildren<DamageArea>();
+        damager.DPS = levels[points];
+        damager.caster = caster;
 
         GetComponent<UnitSpells>().DoneCasting();
-    }
-
-    void Collide(FireProjectileScript script, Vector3 pos, GameObject other) {
-        UnitWithHealth enemy = other.GetComponent<UnitWithHealth>();
-        if (enemy != null) {
-            enemy.TakeDamage(50);
-        }
     }
 }

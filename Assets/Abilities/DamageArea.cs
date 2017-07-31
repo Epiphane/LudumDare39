@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DamageArea : MonoBehaviour {
 
-    public float DPS;
+    public UnitWithHealth caster;
+    public Ability.Stats DPS;
     public float delay;
     public float duration;
 
@@ -88,8 +89,7 @@ public class DamageArea : MonoBehaviour {
                 EnemyBase enemy = overlap.GetComponent<EnemyBase>();
 
                 if (enemy != null) {
-                    enemy.TakeDamage(Mathf.FloorToInt(DPS / 4.0f));
-					print ("Here's where you could say like, damage *= " + SkillManager.skillPoints ["flamestrike"]);
+                    enemy.TakeDamage(caster.ComputeDamage(enemy, DPS) / 4);
                 }
             }
         }

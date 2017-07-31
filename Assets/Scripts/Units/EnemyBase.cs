@@ -42,6 +42,7 @@ public class EnemyBase : UnitWithHealth {
         }
 
         if (isDead) {
+            gameObject.layer = LayerMask.NameToLayer("Default");
             timeSpentDead += Time.deltaTime;
 
             if (timeSpentDead >= timeUntilExpire) {

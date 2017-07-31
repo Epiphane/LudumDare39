@@ -75,6 +75,7 @@ public class UnitSpells : MonoBehaviour {
 
     public void BasicAttack() {
         if (CanCast(Spell.BasicAttack)) {
+            _isCasting = true;
             GetComponent<BasicAttack>().Cast(Vector3.zero);
         }
     }

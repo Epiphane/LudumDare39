@@ -56,9 +56,6 @@ public class UnitWithHealth : MonoBehaviour {
         float armor = other.armor;
         float magicResist = other.magicResist;
 
-        Debug.Log(physical);
-        Debug.Log(armor);
-
         // lol http://leagueoflegends.wikia.com/wiki/Armor
         physical *= 100 / (100 + armor);
         magic *= 100 / (100 + magicResist);

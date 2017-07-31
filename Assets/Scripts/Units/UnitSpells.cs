@@ -25,6 +25,8 @@ public class UnitSpells : MonoBehaviour {
         switch (ability) {
         case Spell.BasicAttack:
             return GetComponent<BasicAttack>().isOffCooldown;
+        case Spell.Flamestrike:
+            return GetComponent<Flamestrike>().isOffCooldown;
         case Spell.Fireball:
             return GetComponent<Fireball>().isOffCooldown;
         case Spell.Volley:

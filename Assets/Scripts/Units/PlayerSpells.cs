@@ -11,6 +11,13 @@ public class PlayerSpells : UnitSpells {
     public Spell dSpell;
     public Spell fSpell;
 
+    public AbilityButton qUI;
+    public AbilityButton wUI;
+    public AbilityButton eUI;
+    public AbilityButton rUI;
+    public AbilityButton dUI;
+    public AbilityButton fUI;
+
     private string Cast = "Fire1";
 
     // Update is called once per frame
@@ -52,6 +59,26 @@ public class PlayerSpells : UnitSpells {
                     currentSpell = null;
                 }
             }
+        }
+    }
+
+    new public void CastAbility(Vector3 point) {
+        base.CastAbility(point);
+
+        switch (_isIndicating) {
+        case Spell.BasicAttack:
+            break;
+        case Spell.Fireball:
+            qUI.SetCooldown(GetComponent<Fireball>().cooldown);
+            break;
+        case Spell.Flamestrike:
+            wUI.SetCooldown(GetComponent<Flamestrike>().cooldown);
+            break;
+        case Spell.Volley:
+            eUI.SetCooldown(GetComponent<Volley>().cooldown);
+            break;
+        default:
+            return;
         }
     }
 }

@@ -22,11 +22,6 @@ public class AbilityButton : MonoBehaviour {
 
 			gameObject.transform.Find ("timeleft").GetComponent<Text> ().text = ((int)cdLeft + 1).ToString();
 		}
-	
-		// TODO: REMOVE
-		if (Input.GetKeyDown (KeyCode.W)) {
-			SetCooldown (3.0f);
-		}
 	}
 
 	public bool ready = true;
@@ -41,4 +36,14 @@ public class AbilityButton : MonoBehaviour {
 
 		ready = false;
 	}
+
+    public Sprite[] below;
+    public Sprite[] above;
+    public Image belowImage;
+    public Image aboveImage;
+
+    public void SetTier(int tier) {
+        belowImage.sprite = below[tier];
+        aboveImage.sprite = above[tier];
+    }
 }

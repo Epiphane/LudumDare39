@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 222660825638710846}
   - component: {fileID: 114390496843631922}
   - component: {fileID: 114481911786111396}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 114414811037396092}
   - component: {fileID: 114287491903215926}
   - component: {fileID: 114630854417525024}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 4083382794103176}
   - component: {fileID: 114566565993603334}
   - component: {fileID: 114233696737694848}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: DamageTextRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -937,7 +937,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4256639508299552}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: IndicatorRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1702,7 +1702,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1689947366803366}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.49, z: 2.9}
+  m_LocalPosition: {x: 0, y: -0.14, z: 2.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4930857964682070}
@@ -2175,9 +2175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27182d13e4191734692119cd31197653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   accel: 4
-  maxSpeed: 2
   director: {fileID: 0}
   animator: {fileID: 0}
 --- !u!114 &114390496843631922
@@ -2312,8 +2310,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0bdfc9dbcfd6b8478ef66b9974fd9ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1200
+  maxHealth: 500
   radius: 1
+  b_moveSpeed: 100
+  b_strength: 50
+  b_intelligence: 40
+  b_armor: 25
+  b_magicResist: 25
   damageTextRoot: {fileID: 4083382794103176}
   damageText: {fileID: 1129973992594822, guid: 36f7803123488c84eb2c808b0272d26a, type: 2}
   animator: {fileID: 0}

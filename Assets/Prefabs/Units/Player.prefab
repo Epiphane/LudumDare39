@@ -328,7 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4445568239099740}
   - component: {fileID: 143454320194681090}
-  - component: {fileID: 114216000014837088}
+  - component: {fileID: 114953376874261078}
   - component: {fileID: 114453800744148582}
   - component: {fileID: 114067161998262252}
   - component: {fileID: 114236740329194160}
@@ -1580,7 +1580,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1217375053819764}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.49, z: -4.29}
+  m_LocalPosition: {x: 0, y: -0.07, z: -9.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4553691442615798}
@@ -2149,10 +2149,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87555a9cef890a34196ec45554779d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isIndicating: 3
+  _isIndicating: 0
   indicatorRoot: {fileID: 4647468050113022}
-  qSpell: 1
-  wSpell: 2
+  qSpell: 2
+  wSpell: 3
+  eSpell: 4
+  rSpell: 0
+  dSpell: 0
+  fSpell: 0
 --- !u!114 &114185557942224938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2169,24 +2173,6 @@ MonoBehaviour:
     type: 2}
   flamestrikePrefab: {fileID: 1775440677867734, guid: e2ee84544575fa54ba093ddd1e939a43,
     type: 2}
---- !u!114 &114216000014837088
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1217375053819764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0bdfc9dbcfd6b8478ef66b9974fd9ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 1200
-  radius: 1
-  damageTextRoot: {fileID: 4731006557369616}
-  damageText: {fileID: 1129973992594822, guid: 36f7803123488c84eb2c808b0272d26a, type: 2}
-  animator: {fileID: 95400674099204072}
-  timeUntilExpire: 10
-  isDummy: 0
 --- !u!114 &114236740329194160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2228,9 +2214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c8d969c31fc3274fb125b4325184d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   accel: 4
-  maxSpeed: 4
   director: {fileID: 0}
   animator: {fileID: 0}
   moveIndicator: {fileID: 1633934516456708, guid: 22f364364d839f549b56437fa1c432c3,
@@ -2374,6 +2358,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sourceOfTruth: {fileID: 0}
+--- !u!114 &114953376874261078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217375053819764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e553073bb6bf834dbdef032259a4bc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1200
+  radius: 1
+  b_moveSpeed: 100
+  b_strength: 10
+  b_intelligence: 10
+  b_armor: 10
+  b_magicResist: 10
+  damageTextRoot: {fileID: 4731006557369616}
+  damageText: {fileID: 1129973992594822, guid: 36f7803123488c84eb2c808b0272d26a, type: 2}
+  animator: {fileID: 0}
 --- !u!137 &137365770847569922
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

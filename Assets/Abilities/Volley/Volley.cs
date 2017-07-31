@@ -11,6 +11,13 @@ public class Volley : Ability {
 
     private UnitMovement myMovement;
 
+    Stats[] levels = {
+        new Stats(0, 0, 0, 0),
+        new Stats(15, 1, 0, 0),
+        new Stats(30, 1, 0, 0),
+        new Stats(45, 1, 0, 0)
+    };
+
     void Start() {
         myMovement = GetComponent<UnitMovement>();
     }
@@ -48,7 +55,7 @@ public class Volley : Ability {
     bool Collide(ProjectileScript script, GameObject other) {
         UnitWithHealth enemy = other.GetComponent<UnitWithHealth>();
         if (enemy != null) {
-            enemy.TakeDamage(50);
+            caster.DealDamage(enemy, levels[SkillManager.currentSkills["volley"].currPoints]);
             return true;
         }
 

@@ -21,7 +21,7 @@ public class BasicAttack : Ability {
     }
 
     public override void Execute() {
-        targetedEnemy.TakeDamage(30);
+        caster.DealDamage(targetedEnemy, new Stats(0, 1, 0, 0));
 
         GetComponent<UnitSpells>().DoneCasting();
     }

@@ -11,6 +11,13 @@ public class Fireball : Ability {
 
     private UnitMovement myMovement;
 
+    Stats[] levels = {
+        new Stats(0, 0, 0, 0),
+        new Stats(0, 0, 30, 0.6f),
+        new Stats(0, 0, 50, 0.6f),
+        new Stats(0, 0, 70, 0.6f)
+    };
+
     void Start() {
         myMovement = GetComponent<UnitMovement>();
     }
@@ -41,7 +48,7 @@ public class Fireball : Ability {
     void Collide(FireProjectileScript script, Vector3 pos, GameObject other) {
         UnitWithHealth enemy = other.GetComponent<UnitWithHealth>();
         if (enemy != null) {
-            enemy.TakeDamage(50);
+            caster.DealDamage(enemy, levels[SkillManager.currentSkills["fireball"].currPoints]);
         }
     }
 }

@@ -124,7 +124,7 @@ public class UnitMovement : MonoBehaviour {
 
         // For moving towards enemies, maintain a distance between
         float magnitude = direction.magnitude;
-        if (magnitude - attackRange < 0.5f) {
+        if (magnitude - attackRange < 0.1f) {
             if (isMovingToTarget) {
                 director.IWantToFace(direction);
             }
@@ -132,15 +132,15 @@ public class UnitMovement : MonoBehaviour {
             return;
         }
 
-        if (direction.magnitude > maxSpeed) {
+        if (direction.magnitude > maxSpeed / 2) {
             direction.Normalize();
-            direction *= maxSpeed;
+            direction *= maxSpeed / 2;
         }
 
         float moveSpeed = direction.magnitude;
         director.IWantToFace(direction);
-        animator.SetFloat("moveSpeed", moveSpeed);
-        charController.SimpleMove(direction);
+        animator.SetFloat("moveSpeed", 2 * moveSpeed);
+        charController.SimpleMove(2 * direction);
     }
     
     protected void FixedUpdate () {

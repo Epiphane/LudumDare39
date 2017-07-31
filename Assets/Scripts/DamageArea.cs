@@ -68,6 +68,7 @@ public class DamageArea : MonoBehaviour {
 
         _duration -= Time.deltaTime;
         if (_duration < 0) {
+            render.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
             return;
         }
 

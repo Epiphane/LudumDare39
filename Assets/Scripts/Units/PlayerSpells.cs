@@ -6,6 +6,10 @@ public class PlayerSpells : UnitSpells {
 
     public Spell qSpell;
     public Spell wSpell;
+    public Spell eSpell;
+    public Spell rSpell;
+    public Spell dSpell;
+    public Spell fSpell;
 
     private string Cast = "Fire1";
 
@@ -16,6 +20,18 @@ public class PlayerSpells : UnitSpells {
         }
         if (Input.GetKeyDown(KeyCode.W)) {
             IndicateAbility(wSpell);
+        }
+        if (Input.GetKeyDown(KeyCode.E)) {
+            IndicateAbility(eSpell);
+        }
+        if (Input.GetKeyDown(KeyCode.R)) {
+            IndicateAbility(rSpell);
+        }
+        if (Input.GetKeyDown(KeyCode.D)) {
+            IndicateAbility(dSpell);
+        }
+        if (Input.GetKeyDown(KeyCode.F)) {
+            IndicateAbility(fSpell);
         }
 
         if (currentSpell != null) {

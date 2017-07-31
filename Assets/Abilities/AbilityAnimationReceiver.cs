@@ -43,4 +43,8 @@ public class AbilityAnimationReceiver : MonoBehaviour {
     public void FlamestrikeComplete() {
         myUnit.GetComponent<Flamestrike>().Execute();
     }
+
+    public void VolleyComplete() {
+        myUnit.GetComponent<Volley>().Execute();
+    }
 }

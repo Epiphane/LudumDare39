@@ -5,10 +5,11 @@ using UnityEngine;
 public class UnitSpells : MonoBehaviour {
 
     public enum Spell {
+        None,
         BasicAttack,
         Fireball, // Q
         Flamestrike, // W
-        None
+        Volley
     };
 
     protected GameObject currentSpell;
@@ -26,6 +27,8 @@ public class UnitSpells : MonoBehaviour {
             return GetComponent<BasicAttack>().isOffCooldown;
         case Spell.Fireball:
             return GetComponent<Fireball>().isOffCooldown;
+        case Spell.Volley:
+            return GetComponent<Volley>().isOffCooldown;
         default:
             return true;
         }
@@ -33,6 +36,9 @@ public class UnitSpells : MonoBehaviour {
 
     /* Returns whether or not the ability is ready for casting */
     public bool IndicateAbility(Spell ability) {
+        if (ability == Spell.None)
+            return true; // ????
+
         if (_isIndicating == ability) {
             // TODO Cancel spell on pressing the letter again?
             return true;
@@ -55,6 +61,9 @@ public class UnitSpells : MonoBehaviour {
             break;
         case Spell.Flamestrike:
             currentSpell = GameObject.Instantiate(GetComponent<Flamestrike>().indicatorPrefab, indicatorRoot);
+            break;
+        case Spell.Volley:
+            currentSpell = GameObject.Instantiate(GetComponent<Volley>().indicatorPrefab, indicatorRoot);
             break;
         default:
             Debug.Log("Indicating nothing :O");
@@ -81,6 +90,9 @@ public class UnitSpells : MonoBehaviour {
             break;
         case Spell.Flamestrike:
             GetComponent<Flamestrike>().Cast(point);
+            break;
+        case Spell.Volley:
+            GetComponent<Volley>().Cast(point);
             break;
         default:
             Debug.Log("Casting nothing :O");

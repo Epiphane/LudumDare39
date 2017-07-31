@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 114236740329194160}
   - component: {fileID: 114763047386828454}
   - component: {fileID: 114185557942224938}
+  - component: {fileID: 114418684113241534}
   - component: {fileID: 114649311884162906}
   m_Layer: 0
   m_Name: Player
@@ -1890,7 +1891,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1736805410710530}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.81, y: 1.079, z: -0.01}
+  m_LocalPosition: {x: 0.547, y: 0.92, z: -0.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4445568239099740}
@@ -2200,6 +2201,22 @@ MonoBehaviour:
   toDirect: {fileID: 0}
   direction: {x: 0, y: 0, z: 0, w: 0}
   smoothing: 0.2
+--- !u!114 &114418684113241534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217375053819764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db009f21323a98e45845fd095e0ee1b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1
+  indicatorPrefab: {fileID: 1399760664350856, guid: 73449564a89a0574fa066c08e709bb62,
+    type: 2}
+  arrowPrefab: {fileID: 1659755999590936, guid: a74148b48f6c89a4bad090ed28195021,
+    type: 2}
 --- !u!114 &114453800744148582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2330,7 +2347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 2
-  indicatorPrefab: {fileID: 1399760664350856, guid: 73449564a89a0574fa066c08e709bb62,
+  indicatorPrefab: {fileID: 1399760664350856, guid: 0df9fb60f82f5cb41acd390c3f4fa873,
     type: 2}
   fireballPrefab: {fileID: 1879638150564762, guid: 80618055faf38154c83ea5417ab0efa8,
     type: 2}

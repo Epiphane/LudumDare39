@@ -271,7 +271,7 @@ RectTransform:
   - {fileID: 234924707}
   - {fileID: 1898114223}
   m_Father: {fileID: 1929134542}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1101,7 +1101,7 @@ RectTransform:
   - {fileID: 226762877}
   - {fileID: 1272112427}
   m_Father: {fileID: 1929134542}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1961,11 +1961,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 468077860}
     m_Modifications:
-    - target: {fileID: 114044679121928478, guid: 71d40b2b1ce3d71449b42beec415ac73,
-        type: 2}
-      propertyPath: parents.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 224442621846890076, guid: 71d40b2b1ce3d71449b42beec415ac73,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -2056,6 +2051,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1054847222965804, guid: 71d40b2b1ce3d71449b42beec415ac73, type: 2}
       propertyPath: m_Name
       value: s53
@@ -2065,6 +2070,78 @@ Prefab:
       propertyPath: kids.Array.data[0]
       value: 
       objectReference: {fileID: 128938300}
+    - target: {fileID: 1958361972132454, guid: 71d40b2b1ce3d71449b42beec415ac73, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_fontSizeBase
+      value: 16.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_textInfo.lineCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 49
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_text
+      value: '<color=#00ffff>ASPECT of Ice</color>
+
+        Your MAGIC ATTACKS <color=#00ffff>SLOW</color> enemies by $VALUE%.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 57
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114376381223058496, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_overflowMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114624926759862390, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 52a0a7358c8366246a207cde0a22fbab,
+        type: 3}
+    - target: {fileID: 114624926759862390, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71d40b2b1ce3d71449b42beec415ac73, type: 2}
   m_IsPrefabParent: 0
@@ -3656,6 +3733,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 468077860}
     m_Modifications:
+    - target: {fileID: 114044679121928478, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: kids.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114044679121928478, guid: 71d40b2b1ce3d71449b42beec415ac73,
+        type: 2}
+      propertyPath: parents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224442621846890076, guid: 71d40b2b1ce3d71449b42beec415ac73,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -4514,7 +4601,7 @@ RectTransform:
   - {fileID: 1145703342}
   - {fileID: 468077860}
   m_Father: {fileID: 1929134542}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5180,9 +5267,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1731680689}
-  - {fileID: 1682133811}
   - {fileID: 364055472}
   - {fileID: 110860025}
+  - {fileID: 1682133811}
   - {fileID: 472076556}
   - {fileID: 1615060733}
   - {fileID: 692609753}

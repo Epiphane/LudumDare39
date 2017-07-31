@@ -107,7 +107,8 @@ public class SkillNode : MonoBehaviour {
 				SetState (SkillNodeState.Destroyed);
 				tooltip.transform.Find ("cover").GetComponent<Image> ().color = new Color (0, 0, 0, 0.75f);
 				foreach (SkillNode k in kids) {
-
+					k.parents.Remove (this);
+					k.UpdateState ();
 				}
 			}
 		}

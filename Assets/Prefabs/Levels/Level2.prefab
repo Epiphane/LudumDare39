@@ -33631,7 +33631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -33901,7 +33901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -34340,7 +34340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -34389,7 +34389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -34451,7 +34451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -34750,7 +34750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -34813,7 +34813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -34920,7 +34920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -35233,7 +35233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -35687,7 +35687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -35862,7 +35862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -35896,7 +35896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -35944,7 +35944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -35993,7 +35993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -36255,7 +36255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0
@@ -36482,7 +36482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 200
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 60
   b_intelligence: 0
   b_armor: 0

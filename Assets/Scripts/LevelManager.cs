@@ -21,8 +21,6 @@ public class LevelManager : MonoBehaviour {
     void Start () {
         skillManager = GameObject.FindObjectOfType<SkillManager>();
 
-        SpawnLevel();
-
         player = GameObject.FindGameObjectWithTag("Player");
     }
 	
@@ -44,7 +42,7 @@ public class LevelManager : MonoBehaviour {
         skillManager.magicPointsToRemove = lvl.magic;
         skillManager.deceptionPointsToRemove = lvl.deception;
         skillManager.strengthPointsToRemove = lvl.strength;
-        skillManager.ShowSkillScreen();
+        skillManager.ShowCurse();
 
         player.transform.position = new Vector3(0, 0, -10);
         player.GetComponent<PlayerMovement>().enabled = false;

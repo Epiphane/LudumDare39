@@ -23,5 +23,12 @@ public class PlayerUnit : UnitWithHealth {
             from.TakeDamage(damage / 10, this);
         }
     }
-    
+
+    public GameObject gameOverScreen;
+
+    new protected void Update() {
+        if (isDead) {
+            gameOverScreen.SetActive(true);
+        }
+    }
 }

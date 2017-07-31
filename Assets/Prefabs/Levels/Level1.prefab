@@ -2351,7 +2351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   b_maxHealth: 100
-  b_moveSpeed: 139
+  b_moveSpeed: 20
   b_strength: 75
   b_intelligence: 0
   b_armor: 0

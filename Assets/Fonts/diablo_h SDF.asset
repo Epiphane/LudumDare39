@@ -1031,7 +1031,7 @@ Material:
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
-    - _SpecularPower: 1.6488905
+    - _SpecularPower: 2.1572948
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0

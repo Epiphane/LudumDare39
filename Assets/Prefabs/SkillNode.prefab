@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 222061096966569466}
   - component: {fileID: 114376381223058496}
   m_Layer: 5
-  m_Name: TextMeshPro Text
+  m_Name: tt_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,9 +131,7 @@ MonoBehaviour:
   kids:
   - {fileID: 0}
   state: 0
-  skillKey: Aspect of Ice
-  points: 2
-  maxPoints: 2
+  skillKey: fireball
   myLabel: {fileID: 114817250452486398}
   overlay: {fileID: 114810010585585932}
   tooltip: {fileID: 1958361972132454}
@@ -590,8 +588,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.8, y: 0.45}
-  m_AnchorMax: {x: 0.8, y: 0.45}
+  m_AnchorMin: {x: 0.8, y: 0.55}
+  m_AnchorMax: {x: 0.8, y: 0.55}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0}

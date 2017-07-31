@@ -48,4 +48,19 @@ public class UnitWithHealth : MonoBehaviour {
 	void Start () {
         _currentHealth = maxHealth;
     }
+
+    void Die() {
+        GetComponent<Animator>().SetBool("dead", true);
+        //GetComponent<Rigidbody>().useGravity = false;
+        //GetComponent<CharacterController>().enabled = false;
+        GetComponent<CharacterController>().height = 0;
+        GetComponent<CharacterController>().radius = 0.2f;
+    }
+
+    // Update is called once per frame
+    protected void Update() {
+        if (isDead) {
+            Die();
+        }
+    }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemySimpleAttackAI : MonoBehaviour {
 
     public float detectionRadius = 5.0f;
-    private bool hasDetectedPlayer = false;
 
     private UnitMovement movement;
 
@@ -16,6 +15,13 @@ public class EnemySimpleAttackAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        UnitWithHealth myHealth = GetComponent<UnitWithHealth>();
+
+        if (myHealth.currentHealth < myHealth.maxHealth) {
+            // Fight back!
+            movement.Target(GameObject.FindGameObjectWithTag("Player"), true);
+        }
+
         if (!movement.isMovingToTarget) {
             Collider[] overlaps = Physics.OverlapSphere(transform.position, detectionRadius);
 

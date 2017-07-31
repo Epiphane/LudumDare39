@@ -129,6 +129,10 @@ public class UnitMovement : MonoBehaviour {
 
         if (target == null || target.isDead) {
             target = null;
+            if (_isMovingToTarget) {
+                // Stop moving to destination
+                destination = transform.position;
+            }
             _isMovingToTarget = false;
         }
 

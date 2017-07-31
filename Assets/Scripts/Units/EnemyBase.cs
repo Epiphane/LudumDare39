@@ -23,16 +23,10 @@ public class EnemyBase : UnitWithHealth {
         base.TakeDamage(damage);
     }
 
-    void Die() {
-        GetComponent<Animator>().SetBool("dead", true);
-        //GetComponent<Rigidbody>().useGravity = false;
-        //GetComponent<CharacterController>().enabled = false;
-        GetComponent<CharacterController>().height = 0;
-        GetComponent<CharacterController>().radius = 0.2f;
-    }
-
 	// Update is called once per frame
-	void Update () {
+	new protected void Update () {
+        base.Update();
+
 		if (isDummy) {
             if (damageCoodown > 0) {
                 damageCoodown -= Time.deltaTime;
@@ -48,8 +42,6 @@ public class EnemyBase : UnitWithHealth {
         }
 
         if (isDead) {
-            Die();
-
             timeSpentDead += Time.deltaTime;
 
             if (timeSpentDead >= timeUntilExpire) {

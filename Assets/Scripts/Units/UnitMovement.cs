@@ -55,6 +55,10 @@ public class UnitMovement : MonoBehaviour {
         // Try and default to the animator attached to this GameObject
         if (animator == null) {
             animator = GetComponent<Animator>();
+
+            if (animator == null) {
+                animator = GetComponentInChildren<Animator>();
+            }
         }
 
         charController = GetComponent<CharacterController>();

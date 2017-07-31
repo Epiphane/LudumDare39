@@ -137,7 +137,7 @@ ModelImporter:
     400126: Spine
     400128: Spine1
     400130: Spine2
-    7400000: sword_and_shield_slash
+    7400000: sword_and_shield_slash_
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -164,7 +164,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: sword_and_shield_slash
+      name: sword_and_shield_slash_
       takeName: mixamo.com
       firstFrame: 0
       lastFrame: 45

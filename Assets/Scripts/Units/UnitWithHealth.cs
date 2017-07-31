@@ -16,6 +16,7 @@ public class UnitWithHealth : MonoBehaviour {
     public GameObject damageText;
 
     // Animator
+    [HideInInspector]
     public Animator animator = null; // Redundant with UnitMovement
 
     public void TakeDamage (int damage) {

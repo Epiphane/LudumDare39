@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum SkillNodeState { CanDestroy, CannotDestroy, Destroyed }
 
@@ -10,6 +11,14 @@ public class SkillNode : MonoBehaviour {
 	public List<SkillNode> kids;
 
 	public SkillNodeState state;
+
+	public string skillKey;
+
+	public int points;
+	public int maxPoints;
+
+	public Text myLabel;
+	public Image overlay;
 
 	/// <summary>
 	/// Parents are assigned by hand, kids are automatically added based on that
@@ -25,17 +34,38 @@ public class SkillNode : MonoBehaviour {
 		}
 	}
 
+	public void SetState(SkillNodeState newState) {
+		state = newState;
+		switch (newState) {
+		case SkillNodeState.CanDestroy:
+			// Overlay = 0 alpha
+			overlay.color = Color.clear;
+			myLabel.color = Color.white;
+			break;
+		case SkillNodeState.CannotDestroy:
+			overlay.color = new Color(0, 0, 0, 0.3f);
+			myLabel.color = Color.gray;
+			break;
+		case SkillNodeState.Destroyed:
+			// Overlay = 80 alpha
+			// Text color = red
+			overlay.color = new Color(0, 0, 0, 0.8f);
+			myLabel.color = Color.red;
+			break;
+		}
+	}
+
 	// Update this node's state based on the nodes around it
 	public void UpdateState() {
 		if (state == SkillNodeState.Destroyed) {
 			return;
 		}
 
-		state = SkillNodeState.CanDestroy;
+		SetState(SkillNodeState.CanDestroy);
 
 		foreach (SkillNode p in parents) {
 			if (p.kids.Count == 1) {
-				state = SkillNodeState.CannotDestroy;
+				SetState(SkillNodeState.CannotDestroy);
 				return;
 			}
 		}
@@ -66,6 +96,7 @@ public class SkillNode : MonoBehaviour {
 			print ("CAN'T DO IT");
 		} else {
 			print ("CAN DO IT");
+			points--;
 
 		}
 	}

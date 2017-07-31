@@ -89,6 +89,7 @@ public class DamageArea : MonoBehaviour {
 
                 if (enemy != null) {
                     enemy.TakeDamage(Mathf.FloorToInt(DPS / 4.0f));
+					print ("Here's where you could say like, damage *= " + SkillManager.skillPoints ["flamestrike"]);
                 }
             }
         }

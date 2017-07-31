@@ -24,16 +24,20 @@ public class BasicAttack : Ability {
     public UnitWithHealth targetedEnemy;
 
     public override void DoCast(Vector3 mouse) {
-        // Animate the fireball
+        // Animate the attack
         Animator anim = GetComponent<Animator>();
         if (anim != null) {
             anim.SetTrigger("basicAttack");
         }
+
+        Vector3 castDirection = targetedEnemy.transform.position - transform.position;
+
+        GetComponent<DirectionSmoother>().IWantToFace(castDirection);
     }
 
     void BasicAttackComplete() {
         targetedEnemy.TakeDamage(30);
 
-        GetComponent<PlayerSpells>().DoneCasting();
+        GetComponent<UnitSpells>().DoneCasting();
     }
 }

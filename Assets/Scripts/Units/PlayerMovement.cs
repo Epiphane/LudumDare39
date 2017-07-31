@@ -38,12 +38,12 @@ public class PlayerMovement : UnitMovement {
                 destination = hit.point;
             }
 
-            isMovingToTarget = false;
+            _isMovingToTarget = false;
             if (eIndicator != null) {
                 Vector3 offFromEnemy = eIndicator.transform.position - destination;
                 if (offFromEnemy.magnitude < 2.0f) {
                     destination = eIndicator.transform.position;
-                    isMovingToTarget = true;
+                    _isMovingToTarget = true;
                 }
             }
         }
@@ -80,6 +80,12 @@ public class PlayerMovement : UnitMovement {
         if (target == null) {
             GameObject.Destroy(eIndicator);
             eIndicator = null;
+        }
+        else {
+            Vector3 enemyPosition = target.transform.position;
+            enemyPosition.y = 0.45f;
+
+            eIndicator.transform.position = enemyPosition;
         }
 
         if (Input.GetKey(KeyCode.Space) && target != null) {

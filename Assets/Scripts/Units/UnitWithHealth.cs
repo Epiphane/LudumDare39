@@ -16,11 +16,12 @@ public class UnitWithHealth : MonoBehaviour {
     public GameObject damageText;
 
     public void TakeDamage (int damage) {
-        _currentHealth -= damage;
-
         if (_currentHealth < 0) {
             _currentHealth = 0;
+            return;
         }
+
+        _currentHealth -= damage;
 
         GameObject dmg = GameObject.Instantiate(damageText, damageTextRoot.position, damageTextRoot.rotation);
         TextMeshPro tmp = dmg.GetComponent<TextMeshPro>();
@@ -30,6 +31,10 @@ public class UnitWithHealth : MonoBehaviour {
     }
 
     public void Heal (int damage) {
+        if (isDead) {
+            return;
+        }
+
         _currentHealth = Mathf.Min(_currentHealth + damage, maxHealth);
 
         GameObject dmg = GameObject.Instantiate(damageText, damageTextRoot.position, damageTextRoot.rotation);

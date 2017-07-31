@@ -9,7 +9,9 @@ public class DamageIndicatorOffset : MonoBehaviour {
     private Vector3 _offset;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         _offset = sourceOfTruth.position - sourceOfTruth.parent.position;
-	}
+        Debug.Log(sourceOfTruth.parent.position);
+        Debug.Log(sourceOfTruth.position);
+    }
 }

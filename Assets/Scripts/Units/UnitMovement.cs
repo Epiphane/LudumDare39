@@ -20,8 +20,9 @@ public class UnitMovement : MonoBehaviour {
     private float radius = 0.5f;
 
     // Enemy targeting
+    public bool isMovingToTarget { get { return _isMovingToTarget; } }
     protected UnitWithHealth target = null;
-    protected bool isMovingToTarget;
+    protected bool _isMovingToTarget;
 
     // Movement
     protected Vector3 destination;
@@ -34,6 +35,7 @@ public class UnitMovement : MonoBehaviour {
 
     // Character controller
     private CharacterController charController;
+    private UnitWithHealth myInfo;
 
     // Use this for initialization
     void Start () {
@@ -51,10 +53,12 @@ public class UnitMovement : MonoBehaviour {
         charController = GetComponent<CharacterController>();
 
         destination = transform.position;
+
+        myInfo = GetComponent<UnitWithHealth>();
     }
 
     public void MoveTo(Vector3 dest) {
-        isMovingToTarget = false;
+        _isMovingToTarget = false;
         destination = dest;
     }
 
@@ -63,6 +67,7 @@ public class UnitMovement : MonoBehaviour {
         target = obj.GetComponent<UnitWithHealth>();
         if (moveTo && target != null) {
             destination = target.transform.position;
+            _isMovingToTarget = true;
         }
 
         return target != null;
@@ -70,7 +75,7 @@ public class UnitMovement : MonoBehaviour {
 
     public void FocusTarget() {
         destination = target.transform.position;
-        isMovingToTarget = true;
+        _isMovingToTarget = true;
     }
 
     // Attempt to attack
@@ -118,14 +123,19 @@ public class UnitMovement : MonoBehaviour {
     }
     
     protected void FixedUpdate () {
+        if (myInfo != null && myInfo.isDead) {
+            return;
+        }
+
         if (target == null || target.isDead) {
             target = null;
-            isMovingToTarget = false;
+            _isMovingToTarget = false;
         }
 
         MoveToDestination();
 
         if (isMovingToTarget) {
+            FocusTarget();
             Vector3 direction = transform.position - destination;
             direction.y = 0;
             if (direction.magnitude <= attackRange + 0.5f) {

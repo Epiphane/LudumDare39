@@ -71,7 +71,9 @@ public class SkillNode : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Skill s = SkillManager.currentSkills [skillKey];
-		tooltip.transform.Find("tt_text").GetComponent<TMPro.TextMeshProUGUI>().text = s.tooltip.Replace ("$VALUE", s.values[s.currPoints - 1].ToString());
+		tooltip.transform.Find("tt_text").GetComponent<TMPro.TextMeshProUGUI>().text = s.tooltip.Replace ("$VALUE", s.GetValue().ToString());
+
+		myLabel.text = s.currPoints.ToString () + "/" + s.maxPoints.ToString ();
 	}
 	
 	// Update is called once per frame
@@ -90,11 +92,24 @@ public class SkillNode : MonoBehaviour {
 	}
 
 	public void SkillChosen() {
+		Skill s = SkillManager.currentSkills [skillKey];
 		if (state != SkillNodeState.CanDestroy) {
 			print ("CAN'T DO IT");
 		} else {
-			print ("CAN DO IT");
+			Skill oneLess = s.MinusOne ();
+			SkillManager.currentSkills [skillKey] = oneLess;
+			myLabel.text = oneLess.currPoints.ToString () + "/" + oneLess.maxPoints.ToString ();
+			print ("Howdy " + oneLess.currPoints);
 
+			if (s.currPoints > 1) {
+				tooltip.transform.Find ("tt_text").GetComponent<TMPro.TextMeshProUGUI> ().text = oneLess.tooltip.Replace ("$VALUE", oneLess.GetValue ().ToString ());
+			} else {
+				SetState (SkillNodeState.Destroyed);
+				tooltip.transform.Find ("cover").GetComponent<Image> ().color = new Color (0, 0, 0, 0.75f);
+				foreach (SkillNode k in kids) {
+
+				}
+			}
 		}
 	}
 }

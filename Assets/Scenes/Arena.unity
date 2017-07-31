@@ -10290,7 +10290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 2
-  indicatorPrefab: {fileID: 1399760664350856, guid: 0df9fb60f82f5cb41acd390c3f4fa873,
+  indicatorPrefab: {fileID: 1399760664350856, guid: 73449564a89a0574fa066c08e709bb62,
     type: 2}
   fireballPrefab: {fileID: 1879638150564762, guid: 80618055faf38154c83ea5417ab0efa8,
     type: 2}

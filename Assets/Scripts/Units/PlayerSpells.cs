@@ -20,6 +20,9 @@ public class PlayerSpells : UnitSpells {
 
     private string Cast = "Fire1";
 
+    void Start() {
+    }
+
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
@@ -30,15 +33,6 @@ public class PlayerSpells : UnitSpells {
         }
         if (Input.GetKeyDown(KeyCode.E)) {
             IndicateAbility(eSpell);
-        }
-        if (Input.GetKeyDown(KeyCode.R)) {
-            IndicateAbility(rSpell);
-        }
-        if (Input.GetKeyDown(KeyCode.D)) {
-            IndicateAbility(dSpell);
-        }
-        if (Input.GetKeyDown(KeyCode.F)) {
-            IndicateAbility(fSpell);
         }
 
         if (currentSpell != null) {

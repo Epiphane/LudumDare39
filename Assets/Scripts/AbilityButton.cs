@@ -9,6 +9,8 @@ public class AbilityButton : MonoBehaviour {
 	void Start () {
 		
 	}
+
+    public string key;
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,6 +24,8 @@ public class AbilityButton : MonoBehaviour {
 
 			gameObject.transform.Find ("timeleft").GetComponent<Text> ().text = ((int)cdLeft + 1).ToString();
 		}
+
+        SetTier(SkillManager.currentSkills[key].currPoints - 1);
 	}
 
 	public bool ready = true;
@@ -43,7 +47,13 @@ public class AbilityButton : MonoBehaviour {
     public Image aboveImage;
 
     public void SetTier(int tier) {
+        if (tier < 0)
+            transform.parent.gameObject.SetActive(false);
+
         belowImage.sprite = below[tier];
         aboveImage.sprite = above[tier];
+
+        RectTransform parent = transform.parent.GetComponentInParent<RectTransform>();
+        parent.position = new Vector3(parent.position.x, 25 + 10 * tier, parent.position.z);
     }
 }

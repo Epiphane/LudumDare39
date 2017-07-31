@@ -63,15 +63,11 @@ public class DamageArea : MonoBehaviour {
         SpriteRenderer render = GetComponent<SpriteRenderer>();
         if (_delay > 0) {
             _delay -= Time.deltaTime;
-
-            render.color = new Color(1.0f, 0.0f, 0.0f, 1.0f - _delay / delay);
             return;
         }
 
-        render.color = Color.red;
         _duration -= Time.deltaTime;
         if (_duration < 0) {
-            render.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
             return;
         }
 

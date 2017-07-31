@@ -28,10 +28,10 @@ public class UnitMovement : MonoBehaviour {
     protected Vector3 destination;
 
     // Direction stuff
-    private DirectionSmoother director;
+    public DirectionSmoother director;
 
     // Animator
-    private Animator animator;
+    public Animator animator;
 
     // Character controller
     private CharacterController charController;
@@ -39,9 +39,12 @@ public class UnitMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        director = GetComponent<DirectionSmoother>();
+        // Try and default to the director attached to this GameObject
         if (director == null) {
-            director = gameObject.AddComponent<DirectionSmoother>();
+            director = GetComponent<DirectionSmoother>();
+            if (director == null) {
+                director = gameObject.AddComponent<DirectionSmoother>();
+            }
         }
 
         UnitWithHealth healthComponent = GetComponent<UnitWithHealth>();
@@ -49,12 +52,30 @@ public class UnitMovement : MonoBehaviour {
             radius = healthComponent.radius;
         }
 
-        animator = GetComponent<Animator>();
+        // Try and default to the animator attached to this GameObject
+        if (animator == null) {
+            animator = GetComponent<Animator>();
+
+            if (animator == null) {
+                animator = GetComponentInChildren<Animator>();
+            }
+        }
+
         charController = GetComponent<CharacterController>();
 
         destination = transform.position;
 
         myInfo = GetComponent<UnitWithHealth>();
+        myInfo.animator = animator;
+
+        if (animator != null) {
+            // Make sure there's an AbilityAnimationReceiver
+            if (animator.GetComponent<AbilityAnimationReceiver>() == null) {
+                AbilityAnimationReceiver receiver = animator.gameObject.AddComponent<AbilityAnimationReceiver>();
+
+                receiver.myUnit = myInfo;
+            }
+        }
     }
 
     public void MoveTo(Vector3 dest) {

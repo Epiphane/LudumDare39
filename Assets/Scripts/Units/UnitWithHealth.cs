@@ -15,6 +15,10 @@ public class UnitWithHealth : MonoBehaviour {
     public Transform damageTextRoot;
     public GameObject damageText;
 
+    // Animator
+    [HideInInspector]
+    public Animator animator = null; // Redundant with UnitMovement
+
     public void TakeDamage (int damage) {
         if (_currentHealth < 0) {
             _currentHealth = 0;
@@ -47,10 +51,13 @@ public class UnitWithHealth : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _currentHealth = maxHealth;
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
     }
 
     void Die() {
-        GetComponent<Animator>().SetBool("dead", true);
+        animator.SetBool("dead", true);
         //GetComponent<Rigidbody>().useGravity = false;
         //GetComponent<CharacterController>().enabled = false;
         GetComponent<CharacterController>().height = 0;

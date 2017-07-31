@@ -11,7 +11,5 @@ public class DamageIndicatorOffset : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         _offset = sourceOfTruth.position - sourceOfTruth.parent.position;
-        Debug.Log(sourceOfTruth.parent.position);
-        Debug.Log(sourceOfTruth.position);
     }
 }

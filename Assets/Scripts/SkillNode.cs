@@ -100,6 +100,7 @@ public class SkillNode : MonoBehaviour {
 			SkillManager.currentSkills [skillKey] = oneLess;
 			myLabel.text = oneLess.currPoints.ToString () + "/" + oneLess.maxPoints.ToString ();
 			print ("Howdy " + oneLess.currPoints);
+			GameObject.FindObjectOfType<SkillManager> ().SkillPointDestroyed (s.school);
 
 			if (s.currPoints > 1) {
 				tooltip.transform.Find ("tt_text").GetComponent<TMPro.TextMeshProUGUI> ().text = oneLess.tooltip.Replace ("$VALUE", oneLess.GetValue ().ToString ());

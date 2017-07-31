@@ -840,7 +840,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "<size=40>POWER DOWN</size>\n<size=20>REMOVE 3 UPGRADE POINTS \nTO CONTINUE</size>"
+  m_text: "<size=40>POWER DOWN</size>\n<size=20>REMOVE $NUM UPGRADE POINTS \nTO CONTINUE</size>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 627e6bff84ebc8c4abc157ed87a43f14, type: 2}
   m_sharedMaterial: {fileID: 21111709370521708, guid: 627e6bff84ebc8c4abc157ed87a43f14,
@@ -908,12 +908,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: -42.934082}
   m_textInfo:
     textComponent: {fileID: 234924709}
-    characterCount: 47
+    characterCount: 50
     spriteCount: 0
     spaceCount: 8
     wordCount: 8
     linkCount: 0
-    lineCount: 3
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -1281,8 +1281,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.90300006}
-  m_AnchoredPosition: {x: 0, y: 147.725}
-  m_SizeDelta: {x: 0, y: 295.45}
+  m_AnchoredPosition: {x: 0, y: 96.855}
+  m_SizeDelta: {x: 0, y: 193.71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468077861
 MonoBehaviour:
@@ -1368,7 +1368,7 @@ MonoBehaviour:
   deceptionXP: 0
   strengthXP: 0
   skillCanvas: {fileID: 1929134541}
-  continueButton: {fileID: 0}
+  continueButton: {fileID: 1615060734}
 --- !u!1001 &530925281
 Prefab:
   m_ObjectHideFlags: 0
@@ -2858,8 +2858,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.90300006}
-  m_AnchoredPosition: {x: 0, y: 88.885}
-  m_SizeDelta: {x: 0, y: 177.77}
+  m_AnchoredPosition: {x: 0, y: 96.855}
+  m_SizeDelta: {x: 0, y: 193.71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1272112428
 MonoBehaviour:
@@ -4868,8 +4868,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.90300006}
-  m_AnchoredPosition: {x: 0, y: 122.71}
-  m_SizeDelta: {x: 0, y: 245.42}
+  m_AnchoredPosition: {x: 0, y: 96.855}
+  m_SizeDelta: {x: 0, y: 193.71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1898114224
 MonoBehaviour:

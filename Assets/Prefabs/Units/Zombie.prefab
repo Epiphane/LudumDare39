@@ -2193,7 +2193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   accel: 4
-  maxSpeed: 2
+  maxSpeed: 1
   director: {fileID: 0}
   animator: {fileID: 95577317697926166}
 --- !u!114 &114543494243818614
